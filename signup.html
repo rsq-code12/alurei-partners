@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://partners.alurei.app/signup.html">
+<meta property="og:title" content="Partner sign-up · Alurei">
+<meta property="og:description" content="Free to join: no fees, no commission.">
+<meta property="og:image" content="https://partners.alurei.app/assets/icon.png">
+<meta property="og:url" content="https://partners.alurei.app/signup.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alurei">
+<meta name="twitter:card" content="summary">
+<title>Partner sign-up · Alurei</title>
+<!-- Language comes from the link only (?lang=ar); set before the first paint so the page opens right-to-left -->
+<script>(function(){try{if(new URLSearchParams(location.search).get('lang')==='ar'){var d=document.documentElement;d.lang='ar';d.dir='rtl';}}catch(e){}})();</script>
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Alurei partner sign-up (Aoife's 18 Nov design). Sends a request to the Alurei team; the account is set up after the venue is approved. -->
+<style>
+  :root {
+    --page:#F4F4F4; --tile:#E7EEEF; --line:#EEF2F6; --rule:#F0F2F8; --tabs:#041D21;
+    --found:#062E35; --found-line:#083C44; --found-on:#0A4C57; --avatar:#005B66;
+    --brand:#0B5460; --brand-h:#08424B; --accent:#009E9E; --eyebrow:#007070; --tile-line:#CAEFEF; --soft:#D7EFEF; --ok-tint:#E7F6F7;
+    --head:#202939; --strong:#364152; --body:#4B5565; --muted:#697586; --muted-field:#637083; --od-1:#EEF2F6; --od-2:#E3E8EF; --od-3:#CDD5DF;
+    --field:#F8FAFC; --in-line:#E8ECF4; --field-line:#76929A; --req:#EF4444;
+    --err:#E11D48; --err-ink:#BE123C; --err-bg:#FFF1F2; --err-line:#FECDD3; --ok:#067647;
+    --e-ui:cubic-bezier(.4,0,.2,1); --e-out3:cubic-bezier(.25,1,.5,1); --e-back:cubic-bezier(.34,1.45,.64,1); --e-enter:cubic-bezier(.16,1,.3,1);
+    --bar:40px;
+    --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234B5565' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    --tickmark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; min-height: 100vh; background: var(--page); color: var(--body); font: 400 14px/20px Inter, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, p { margin: 0; }
+  a { color: var(--brand); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  [tabindex="-1"]:focus { outline: none; }
+  .vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  svg { display: block; }
+  /* Spam trap, as on the partner page: out of sight and out of the tab order */
+  .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; opacity: 0; pointer-events: none; }
+
+  /* ---------- The app's sign-up column ---------- */
+  .auth { padding: 32px 24px 80px; }
+  .col { max-width: 540px; margin: 0 auto; }
+  @media (max-width: 639px) { .auth { padding: 24px 16px 64px; } }
+
+  .intro { text-align: center; }
+  .intro h1 { font-size: 24px; line-height: 32px; font-weight: 600; color: var(--head); }
+  .intro p { margin-top: 10px; font-size: 14px; line-height: 20px; color: var(--body); }
+  .intro p, .f > legend, .help, .callout { text-wrap: pretty; }
+  body[data-scr="s2"] .intro p, body[data-scr="s3"] .intro p, body[data-scr="s4"] .intro p { font-size: 16px; line-height: 24px; }
+
+  .steps { display: flex; justify-content: center; align-items: center; list-style: none; margin: 36px 0 0; padding: 0; }
+  .steps li { display: flex; align-items: center; }
+  .steps li + li::before { content: ""; width: 48px; height: 2px; margin: 0 8px; border-radius: 2px; background: var(--tile); }
+  .steps .c { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--tile); color: var(--body); font-size: 14px; line-height: 20px; font-weight: 500; }
+  .steps .st-cur .c, .steps .st-done .c { background: var(--brand); color: #fff; }
+  .steps .c svg { width: 14px; height: 14px; }
+  @media (max-width: 379px) { .steps li + li::before { width: 40px; } }
+
+  .card { position: relative; margin-top: 28px; padding: 32px; background: #fff; border: 1px solid var(--tile); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+  @media (max-width: 479px) { .card { padding: 24px; } }
+  .ct { font-size: 16px; line-height: 24px; font-weight: 500; color: var(--head); }
+  .banner { margin-top: 20px; padding: 12px; border: 1px solid var(--err-line); border-radius: 12px; background: var(--err-bg); color: var(--err-ink); font-size: 14px; line-height: 20px; font-weight: 500; }
+  .banner:first-child { margin-top: 0; }
+  .banner a { color: inherit; font-weight: 600; text-underline-offset: 2px; }
+  .banner, .card input, .card select, .card textarea, .lt { scroll-margin-top: 96px; scroll-margin-bottom: 24px; }
+  .fields { display: grid; gap: 18px; margin-top: 24px; }
+  .fields:first-child { margin-top: 0; }
+  .banner + .fields { margin-top: 20px; }
+  /* On a phone: when the field to fix is far below the red box, the box stays pinned at the top */
+  .banner.stick { position: sticky; top: 8px; z-index: 4; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+  .banner.stick::before { content: ""; position: absolute; inset-inline: -1px; bottom: calc(100% + 1px); height: 9px; background: #fff; } /* fills the gap above the box */
+
+  /* Fields: taller and clearer than the app's 40px, with a teal ring and a message under each field */
+  .f { display: grid; gap: 8px; align-content: start; min-width: 0; margin: 0; padding: 0; border: 0; }
+  .f > legend { padding: 0; margin-bottom: 8px; }
+  .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px 14px; }
+  @media (max-width: 479px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+  .lbl, .f > label, .f > legend { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--head); }
+  .req { color: var(--req); font-style: normal; margin-inline-start: 3px; }
+  .opt { font-weight: 400; color: var(--muted); }
+  .inp { width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--field-line); border-radius: 16px; background: var(--field); color: var(--head); font-size: 14px; line-height: 20px; transition: border-color .15s var(--e-ui), box-shadow .15s var(--e-ui); }
+  .inp::placeholder { color: var(--muted-field); opacity: 1; }
+  .inp:focus, .tel:focus-within { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,158,158,.2); }
+  select.inp { appearance: none; -webkit-appearance: none; padding-inline-end: 38px; background-image: var(--chev); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; cursor: pointer; text-overflow: ellipsis; }
+  html[dir="rtl"] select.inp { background-position: left 12px center; }
+  select.inp.empty { color: var(--muted-field); }
+  select.inp option { color: var(--head); }
+  select.inp option:disabled { color: #9AA4B2; }
+  textarea.inp.grow { display: block; height: 44px; padding: 11px 12px; resize: none; overflow: hidden; }
+  @media (max-width: 639px) {
+    .inp { font-size: 16px; }
+    textarea.inp.grow { height: 66px; line-height: 22px; padding: 10px 12px; }
+    /* Only Address starts on two lines (its example wraps); Opening Hours stays one line until it needs more */
+    textarea.inp.grow[id^="hours-"] { height: 44px; line-height: 20px; padding: 11px 12px; }
+  }
+  @media (max-width: 379px) { input[id^="tt-"] { padding-inline: 10px; } input[id^="tt-"]::placeholder { font-size: 14px; } }
+  .f.bad > .inp, .f.bad > .tel, .f.bad .pctrow .inp { border-color: var(--err); }
+  .f.bad > .inp:focus, .f.bad > .tel:focus-within { box-shadow: 0 0 0 2px rgba(225,29,72,.18); }
+  .err { display: flex; gap: 6px; align-items: flex-start; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--err); }
+  .err::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 5px; border-radius: 50%; background: currentColor; }
+  .okn { font-size: 12px; line-height: 16px; font-weight: 500; color: var(--ok); }
+  .help { font-size: 13px; line-height: 18px; color: var(--body); }
+  .f > .help { margin-top: -2px; }
+
+  .upload { display: grid; justify-items: center; gap: 4px; padding: 26px; border: 2px dashed var(--od-3); border-radius: 18px; text-align: center; cursor: pointer; transition: border-color .2s var(--e-ui), background-color .2s var(--e-ui); }
+  .upload:hover { border-color: var(--field-line); background: #FCFCFD; }
+  .f.lbad .upload { border-color: var(--err); }
+  #logo:focus-visible + .upload { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .up-ic { width: 40px; height: 40px; margin-bottom: 8px; border-radius: 50%; display: grid; place-items: center; background: #F5F5F4; color: var(--head); overflow: hidden; }
+  .up-ic svg { width: 18px; height: 18px; }
+  .up-ic img { width: 100%; height: 100%; object-fit: cover; }
+  .upload b { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--head); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .upload small { font-size: 12px; line-height: 16px; color: var(--muted); }
+
+  .tel { display: flex; height: 44px; border: 1px solid var(--field-line); border-radius: 16px; background: var(--field); overflow: hidden; transition: border-color .15s var(--e-ui), box-shadow .15s var(--e-ui); }
+  .cc { position: relative; flex: none; display: flex; align-items: center; gap: 4px; padding: 0 8px 0 12px; border-inline-end: 1px solid #D5E4E6; color: var(--head); font-weight: 500; }
+  .cc svg { width: 14px; height: 14px; color: var(--body); }
+  .cc select { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; border: 0; cursor: pointer; font-size: 16px; }
+  .tel input { flex: 1; min-width: 0; height: 100%; padding: 0 12px; border: 0; background: transparent; color: var(--head); font-size: 14px; }
+  .tel input::placeholder { color: var(--muted-field); opacity: 1; }
+  .tel input:focus { outline: none; }
+  @media (max-width: 639px) { .tel input { font-size: 16px; } } /* 16px like every other field, so iPhones don't zoom */
+  .f.same .tel { background: #F2F4F7; }
+  .f.same .tel input, .f.same .cc { color: var(--strong); }
+
+  .rads { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+  .radio { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; font-size: 14px; line-height: 20px; color: var(--head); cursor: pointer; }
+  .radio input { appearance: none; -webkit-appearance: none; flex: none; width: 20px; height: 20px; margin: 0; border: 1.5px solid var(--brand); border-radius: 50%; background: #fff; display: grid; place-items: center; cursor: pointer; transition: background-color .2s var(--e-ui); }
+  .radio input::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--brand); transform: scale(0); transition: transform .15s var(--e-back); }
+  .radio input:checked::after { transform: scale(1); }
+
+  /* Tick boxes (her [tick] items) */
+  .tick { appearance: none; -webkit-appearance: none; flex: none; width: 24px; height: 24px; margin: 0; border: 1.5px solid var(--field-line); border-radius: 6px; background: #fff; display: grid; place-items: center; cursor: pointer; transition: background-color .2s var(--e-ui), border-color .2s var(--e-ui); }
+  .tick::after { content: ""; width: 14px; height: 14px; background: var(--tickmark) center / contain no-repeat; opacity: 0; transform: scale(.8); transition: opacity .15s var(--e-ui), transform .15s var(--e-back); }
+  .tick:checked { background: var(--brand); border-color: var(--brand); }
+  .tick:checked::after { opacity: 1; transform: scale(1); }
+  .tick.sm { width: 20px; height: 20px; border-radius: 5px; }
+  .tick.sm::after { width: 12px; height: 12px; }
+  .tick:disabled { background: #F2F4F7; border-color: var(--od-3); cursor: not-allowed; }
+  .tickl { display: inline-flex; align-items: center; gap: 10px; min-height: 32px; font-size: 14px; line-height: 20px; color: var(--head); cursor: pointer; }
+  .ages { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 2px 16px; }
+  .f.bad .ages, .f.bad > .rads { border-radius: 8px; box-shadow: 0 0 0 1px var(--err); padding: 2px 8px; }
+
+  /* Step 2: her three offers */
+  .orows { display: grid; gap: 10px; }
+  .orow { border: 1px solid var(--tile); border-radius: 16px; background: var(--field); transition: border-color .2s var(--e-ui), background-color .2s var(--e-ui); }
+  .orow.on { border-color: var(--brand); background: #fff; }
+  .ohead { display: flex; gap: 12px; align-items: flex-start; min-height: 52px; padding: 14px 16px; cursor: pointer; }
+  .otx { min-width: 0; }
+  .otx b { display: block; font-size: 15px; line-height: 22px; font-weight: 600; color: var(--head); }
+  .otx small { display: block; font-size: 13px; line-height: 18px; color: var(--body); }
+  .omore { display: grid; gap: 14px; padding: 0 16px 16px; padding-inline-start: 52px; }
+  .sub { display: grid; gap: 6px; min-width: 0; }
+  .sl, .sub > legend { font-size: 13px; line-height: 18px; font-weight: 500; color: var(--head); }
+  .peakmore { margin-top: 4px; }
+  .pctrow { display: flex; align-items: center; gap: 10px; }
+  .pctrow .inp { width: 80px; text-align: center; }
+  .pctrow span { font-size: 14px; font-weight: 500; color: var(--strong); }
+  .callout { padding: 12px 14px; border-radius: 12px; background: var(--tile); color: var(--strong); font-size: 14px; line-height: 20px; }
+  .carried { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border-radius: 12px; background: var(--tile); color: var(--strong); font-size: 14px; line-height: 20px; }
+  .carried svg { width: 18px; height: 18px; margin-top: 1px; flex: none; color: var(--brand); }
+  @media (max-width: 479px) { .omore { padding-inline-start: 16px; } }
+
+  /* Step 3: locations */
+  .locs { display: grid; gap: 22px; }
+  .loc { display: grid; gap: 18px; }
+  .loc + .loc { padding-top: 22px; border-top: 1px solid var(--rule); }
+  .loch { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .lt { font-size: 15px; line-height: 22px; font-weight: 600; color: var(--head); }
+  .rm { padding: 6px 4px; border: 0; background: none; color: var(--brand); font-size: 14px; line-height: 20px; font-weight: 500; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: color .2s var(--e-ui), transform .15s var(--e-ui); }
+  .branch { display: grid; gap: 4px; padding: 16px; border: 1px dashed var(--od-3); border-radius: 16px; }
+  .addloc { justify-self: start; margin-top: 8px; height: 44px; padding: 0 14px; border: 1px solid var(--tile-line); border-radius: 16px; background: #fff; color: var(--brand); font-size: 14px; line-height: 20px; font-weight: 600; cursor: pointer; transition: background-color .2s var(--e-ui), transform .15s var(--e-ui); }
+  .addloc:hover { background: var(--ok-tint); }
+
+  .termsl { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 20px; color: var(--strong); cursor: pointer; }
+  .termsl .tick { margin-top: -2px; }
+  .termsl a { transition: color .2s var(--e-ui); }
+
+  .summary { padding: 16px 18px; border-radius: 10px; background: var(--page); }
+  .summary > span { display: block; font-size: 12px; line-height: 18px; font-weight: 600; color: var(--body); }
+  .summary dl { display: grid; gap: 8px; margin: 10px 0 0; }
+  .summary dl > div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; }
+  .summary dt { font-size: 13px; line-height: 20px; color: var(--body); }
+  .summary dd { margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--head); overflow-wrap: anywhere; }
+  .summary dd span { display: block; }
+  .summary dd.none { font-weight: 400; font-style: italic; color: var(--body); }
+  @media (max-width: 379px) { .summary dl > div { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+  .actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .actions.end { justify-content: flex-end; }
+  .promise { margin-top: 10px; text-align: end; font-size: 13px; line-height: 18px; color: var(--body); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 44px; padding: 0 16px; border: 1px solid transparent; border-radius: 16px; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .2s var(--e-ui), transform .15s var(--e-ui); }
+  .btn:active { transform: scale(.98); }
+  .btn.pri { background: var(--brand); color: #fff; }
+  .btn.pri:hover { background: var(--brand-h); }
+  .btn.sec { background: #EEF2F6; border-color: #E8ECF4; color: var(--head); }
+  .btn.sec:hover { background: var(--od-2); }
+  .btn:disabled { opacity: .5; cursor: default; transform: none; }
+
+  /* Request sent */
+  .done { display: grid; justify-items: center; padding-top: 24px; text-align: center; }
+  .okc { width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; background: var(--ok-tint); color: var(--brand); }
+  .okc svg { width: 48px; height: 48px; }
+  .done h1 { margin-top: 28px; font-size: 30px; line-height: 38px; font-weight: 600; color: #0A0A0A; text-wrap: balance; }
+  .done p { margin-top: 12px; max-width: 460px; font-size: 16px; line-height: 24px; color: var(--body); overflow-wrap: anywhere; }
+  .done .btn { margin-top: 28px; min-width: 136px; }
+  /* Preview hosts only: says plainly that nothing left the page */
+  .done .devnote { margin-top: 24px; padding: 10px 14px; border: 1px solid #F3E1B8; border-radius: 12px; background: #FFF7E6; color: #6B4E16; font-size: 13px; line-height: 18px; }
+  @media (max-width: 639px) { .done h1 { font-size: 24px; line-height: 32px; } }
+
+  /* Public site until the sign-up address is connected */
+  .soon p { font-size: 16px; line-height: 24px; color: var(--strong); text-align: center; text-wrap: pretty; }
+  .soon .actions { justify-content: center; }
+
+  /* ---------- Venue card (step 2): the app's offer-card anatomy ---------- */
+  .pl { font-size: 12px; line-height: 18px; font-weight: 600; color: var(--body); }
+  .prev { display: grid; gap: 8px; }
+  .prev-side { display: none; }
+  @media (min-width: 1280px) {
+    .prev-side { display: block; position: absolute; top: 0; bottom: 0; inset-inline-start: calc(100% + 28px); width: 300px; }
+    .prev-inline { display: none !important; }
+  }
+  @media (min-width: 1400px) { .prev-side { width: 340px; } }
+  .prev-side .prev { position: sticky; top: 20px; }
+  .vc { overflow: hidden; border: 1px solid var(--tile); border-radius: 16px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.04); }
+  .vc-ban { position: relative; height: 150px; background: var(--tile); }
+  .vc-ban img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .vc-ex { position: absolute; top: 10px; inset-inline-end: 10px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--brand); font-size: 11px; line-height: 16px; font-weight: 600; }
+  .vc-body { padding: 16px; }
+  .vc-head { display: flex; align-items: center; gap: 10px; }
+  .vc-head > div { min-width: 0; }
+  .vc-av { flex: none; width: 36px; height: 36px; padding: 7px; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: rgba(0,158,158,.10); color: var(--brand); font-size: 13px; line-height: 1; font-weight: 700; }
+  .vc-av.img { padding: 0; }
+  .vc-av img { width: 100%; height: 100%; object-fit: cover; }
+  .vc-name { display: block; font-size: 18px; line-height: 26px; font-weight: 600; color: var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .vc-sub { display: block; font-size: 13px; line-height: 18px; color: var(--body); }
+  .vc-class, .vc-price { margin-top: 16px; }
+  .vc-t { display: block; font-size: 16px; line-height: 24px; font-weight: 600; color: var(--head); }
+  .vc-s { display: block; margin-top: 2px; font-size: 13px; line-height: 18px; color: var(--body); }
+  .vc-peak { display: flex; align-items: flex-start; gap: 6px; margin-top: 8px; font-size: 13px; line-height: 18px; color: var(--eyebrow); }
+  .vc-peak svg { width: 14px; height: 14px; flex: none; margin-top: 2px; }
+  .vc-drink { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; padding: 12px 16px; border: 1px solid #E4E7EC; border-radius: 16px; }
+  .vc-drink svg { width: 20px; height: 20px; flex: none; color: var(--accent); }
+  .vc-drink b { display: block; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--head); }
+  .vc-drink small { display: block; font-size: 13px; line-height: 18px; color: var(--body); }
+  .vc-btn { display: flex; align-items: center; justify-content: center; height: 44px; margin-top: 12px; border-radius: 16px; background: var(--brand); color: #fff; font-size: 14px; line-height: 20px; font-weight: 600; }
+  .vc-btn.alt { background: #FAFAFA; border: 1px solid var(--accent); color: var(--eyebrow); font-weight: 500; }
+  .vc-div { height: 1px; margin: 16px 0 0; border: 0; background: var(--line); }
+  .vc-empty { margin-top: 16px; padding: 16px; border-radius: 12px; background: var(--page); text-align: center; font-size: 14px; line-height: 20px; color: var(--body); }
+
+  /* ---------- Hover and press, as on alurei.app (200ms colour change, scale .98 when pressed) ---------- */
+  @media (hover: hover) {
+    .tickl:hover .tick:not(:checked):not(:disabled), .ohead:hover .tick:not(:checked):not(:disabled), .termsl:hover .tick:not(:checked) { border-color: var(--brand); background: #F2F6F7; }
+    .radio:hover input:not(:checked) { background: #F2F6F7; }
+    .orow:not(.on):hover { border-color: var(--tile-line); background: #fff; }
+    .rm:hover, .termsl a:hover { color: var(--brand-h); text-decoration-thickness: 2px; }
+  }
+  .addloc:active, .rm:active { transform: scale(.98); }
+
+  /* ---------- Tap targets on phones: 44px rows for ticks, radios and small links ---------- */
+  @media (max-width: 639px) {
+    .tickl, .radio { min-height: 44px; }
+    .ages { row-gap: 0; }
+    .rm { min-height: 44px; padding: 12px 8px; }
+    .termsl { line-height: 24px; }
+    .termsl .tick { margin-top: 0; }
+    .termsl a { padding-block: 4px; } /* a 24px-tall target for the links inside the sentence */
+  }
+
+  /* ---------- Motion: screen change, block entry, success pop ---------- */
+  @keyframes scrIn { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes blkIn { from { opacity: 0; transform: translateY(8px); } }
+  @keyframes pop { from { opacity: 0; transform: scale(.8); } }
+  .scr-in { animation: scrIn .45s var(--e-enter) both; }
+  .enter { animation: blkIn .3s var(--e-out3) both; }
+  .done.scr-in .okc, .scr-in .done .okc { animation: pop .5s var(--e-back) .12s both; }
+  @media (prefers-reduced-motion: reduce) {
+    .scr-in, .enter, .done.scr-in .okc, .scr-in .done .okc { animation: none !important; }
+    .tick::after, .radio input::after { transition: none !important; }
+  }
+  html.still .scr-in, html.still .enter, html.still .done.scr-in .okc, html.still .scr-in .done .okc { animation: none !important; }
+  html.still .tick::after, html.still .radio input::after { transition: none !important; }
+
+  /* ---------- Language: English ⇄ العربية (as on the partner page) ---------- */
+  .topbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 12px; margin-bottom: 16px; }
+  .lang-b { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--tile-line); border-radius: 16px; background: #fff; color: var(--brand); font-family: "IBM Plex Sans Arabic", Inter, sans-serif; font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color .2s var(--e-ui), color .2s var(--e-ui), transform .15s var(--e-ui); }
+  .lang-b svg { width: 18px; height: 18px; }
+  .lang-b:hover { background: var(--ok-tint); color: var(--brand-h); }
+  .lang-b:active { transform: scale(.98); }
+  /* Preview hosts only, when Arabic is on */
+  .draft { margin-inline-end: auto; padding: 6px 12px; border: 1px solid #F3E1B8; border-radius: 12px; background: #FFF7E6; color: #6B4E16; font-family: Inter, "IBM Plex Sans Arabic", sans-serif; font-size: 12px; line-height: 18px; font-weight: 500; }
+
+  /* Arabic: IBM Plex Sans Arabic, with taller lines as on the partner page */
+  html[lang="ar"] body { font-family: "IBM Plex Sans Arabic", Inter, sans-serif; line-height: 22px; }
+  html[lang="ar"] :is(.intro h1, .done h1) { line-height: 1.4; }
+  html[lang="ar"] :is(.intro p, .lbl, .f > label, .f > legend, .radio, .tickl, .termsl, .callout, .carried, .banner, .vc-empty, .vc-drink b, .upload b, .rm) { line-height: 22px; }
+  html[lang="ar"] :is(.help, .sl, .sub > legend, .otx small, .vc-s, .vc-sub, .vc-drink small, .vc-peak, .promise, .summary dt) { line-height: 20px; }
+  html[lang="ar"] :is(.err, .okn, .upload small, .pl, .summary > span) { line-height: 18px; }
+  html[lang="ar"] body[data-scr="s2"] .intro p, html[lang="ar"] body[data-scr="s3"] .intro p, html[lang="ar"] body[data-scr="s4"] .intro p, html[lang="ar"] :is(.done p, .soon p) { line-height: 26px; }
+  html[lang="ar"] :is(.tel input, .cc, input[dir="ltr"]) { font-family: Inter, "IBM Plex Sans Arabic", sans-serif; } /* Latin digits, e-mail and links as in English */
+  html[dir="rtl"] input[dir="ltr"] { text-align: right; }
+  html[lang="ar"] .summary dl > div { grid-template-columns: 96px minmax(0, 1fr); }
+  @media (max-width: 379px) { html[lang="ar"] .summary dl > div { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body data-scr="s1">
+
+<main class="auth" id="auth">
+  <div class="col" id="col">
+    <div class="topbar">
+      <p class="draft" id="draftBadge" hidden><span lang="en" dir="ltr">Arabic draft – needs native check</span> · <span lang="ar" dir="rtl">مسودة عربية – تحتاج إلى مراجعة من متحدث أصلي</span></p>
+      <button type="button" class="lang-b" id="langB" lang="ar" aria-label="العربية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span id="langL">العربية</span></button>
+    </div>
+    <header class="intro" id="intro">
+      <h1 id="introT" tabindex="-1" data-i18n="intro.t">Welcome to Alurei Partners</h1>
+      <p id="introS" data-i18n="intro.s">Let's set up your business before you get started.</p>
+    </header>
+
+    <ol class="steps" id="steps" aria-label="Sign-up steps" data-i18n-aria="steps.aria"></ol>
+
+    <!-- STEP 1: Business Details -->
+    <form class="card" id="s1" novalidate>
+      <h2 class="ct" tabindex="-1" data-i18n="s1.t">Step 1 — Business Details</h2>
+      <p class="banner" data-sum role="alert" hidden></p>
+      <div class="fields">
+        <div class="f" id="logoF">
+          <input type="file" id="logo" class="vh" accept="image/png,image/jpeg,image/webp">
+          <label for="logo" class="upload">
+            <span class="up-ic" id="upIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7 9l5-5 5 5"/><path d="M20 15v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4"/></svg></span>
+            <b id="upT"><span data-i18n="logo.t">Upload logo</span> <span class="opt" data-i18n="opt">(optional)</span></b>
+            <small id="upS" data-i18n="logo.s">PNG, JPG or WEBP, up to 2 MB. You can add it later.</small>
+          </label>
+          <p class="err" id="logoErr" hidden></p>
+        </div>
+
+        <div class="f" data-f="venue">
+          <label for="venue"><span data-i18n="venue.l">Business Name</span><i class="req" aria-hidden="true">*</i></label>
+          <input class="inp" id="venue" type="text" autocomplete="organization" placeholder="e.g. Little Stars Nursery" data-i18n-ph="venue.ph" aria-required="true">
+          <p class="err" hidden></p>
+        </div>
+
+        <div class="f" data-f="cat">
+          <label for="cat"><span data-i18n="cat.l">Business Category</span><i class="req" aria-hidden="true">*</i></label>
+          <select class="inp empty" id="cat" aria-required="true">
+            <option value="" disabled selected data-i18n="cat.ph">Select a category</option>
+            <option value="Nursery &amp; Early Learning" data-i18n="cat.1">Nursery &amp; Early Learning</option>
+            <option value="Kids’ Classes &amp; Activities" data-i18n="cat.2">Kids’ Classes &amp; Activities</option>
+            <option value="Soft Play, Parties &amp; Entertainment" data-i18n="cat.3">Soft Play, Parties &amp; Entertainment</option>
+            <option value="Family Dining &amp; Cafés" data-i18n="cat.4">Family Dining &amp; Cafés</option>
+            <option value="Children’s Health &amp; Wellness" data-i18n="cat.5">Children’s Health &amp; Wellness</option>
+            <option value="Mum &amp; Family Wellness" data-i18n="cat.6">Mum &amp; Family Wellness</option>
+            <option value="Baby &amp; Kids’ Retail" data-i18n="cat.7">Baby &amp; Kids’ Retail</option>
+            <option value="Family Travel &amp; Staycations" data-i18n="cat.8">Family Travel &amp; Staycations</option>
+            <option value="Home &amp; Family Services" data-i18n="cat.9">Home &amp; Family Services</option>
+            <option value="Other" data-i18n="cat.other">Other</option>
+          </select>
+          <p class="err" hidden></p>
+        </div>
+
+        <div class="f" data-f="catOther" id="catOtherF" hidden>
+          <label for="catOther"><span data-i18n="catOther.l">Your category</span><i class="req" aria-hidden="true">*</i></label>
+          <input class="inp" id="catOther" type="text" placeholder="e.g. Photography studio" data-i18n-ph="catOther.ph" aria-required="true">
+          <p class="err" hidden></p>
+        </div>
+
+        <fieldset class="f" data-f="ages" data-ctl="age0">
+          <legend><span data-i18n="ages.l">Ages you welcome</span><i class="req" aria-hidden="true">*</i></legend>
+          <p class="help" id="agesH" data-i18n="ages.h">Tick all that apply.</p>
+          <div class="ages">
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="0" id="age0" aria-describedby="agesH"><span data-i18n="age.0">0 to 6 months</span></label>
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="1" id="age1"><span data-i18n="age.1">6 to 12 months</span></label>
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="2" id="age2"><span data-i18n="age.2">1 to 2 years</span></label>
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="3" id="age3"><span data-i18n="age.3">2 to 4 years</span></label>
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="4" id="age4"><span data-i18n="age.4">4 to 8 years</span></label>
+            <label class="tickl"><input type="checkbox" class="tick sm" name="ages" value="5" id="age5"><span data-i18n="age.5">8 years +</span></label>
+          </div>
+          <p class="err" hidden></p>
+        </fieldset>
+
+        <div class="f" data-f="web">
+          <label for="web" data-i18n="web.l">Website</label>
+          <input class="inp" id="web" type="text" inputmode="url" autocomplete="url" spellcheck="false" dir="ltr" placeholder="https://yourwebsite.com">
+          <p class="err" hidden></p>
+        </div>
+
+        <div class="pair">
+          <div class="f" data-f="email">
+            <label for="email"><span data-i18n="email.l">Email</span><i class="req" aria-hidden="true">*</i></label>
+            <input class="inp" id="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" dir="ltr" placeholder="hello@business.com" aria-required="true">
+            <p class="err" hidden></p>
+          </div>
+          <div class="f" data-f="phone" data-ctl="phone">
+            <label for="phone" data-i18n="phone.l">Phone Number</label>
+            <div class="tel" dir="ltr">
+              <span class="cc"><span id="ccv-phone">+971</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <select id="cc-phone" aria-label="Country code" data-i18n-aria="cc.aria" autocomplete="tel-country-code"></select>
+              </span>
+              <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 50 123 4567">
+            </div>
+            <p class="okn" id="ok-phone" hidden></p>
+            <p class="err" hidden></p>
+          </div>
+        </div>
+      </div>
+      <div class="actions end"><button class="btn pri" type="submit" data-i18n="btn.next">Continue →</button></div>
+    </form>
+
+    <!-- STEP 2: Your Offer -->
+    <form class="card" id="s2" novalidate hidden>
+      <h2 class="ct" id="s2T" tabindex="-1" data-i18n="s2.t">Step 2 — Your Offer</h2>
+      <p class="banner" data-sum role="alert" hidden></p>
+      <div class="fields">
+        <p class="carried" id="carried" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 16v-4.5M12 8h.01"/></svg><span data-i18n="carried">We’ve kept the offer you chose on the partner page.</span></p>
+        <fieldset class="f" data-f="offer" data-ctl="optClass">
+          <legend><span data-i18n="offer.l">Choose one, two or all three for Alurei families.</span><i class="req" aria-hidden="true">*</i></legend>
+          <div class="orows">
+            <div class="orow" data-opt="class">
+              <label class="ohead"><input type="checkbox" class="tick" id="optClass" aria-describedby="optClassD"><span class="otx"><b data-i18n="class.t">A complimentary class</b><small id="optClassD" data-i18n="class.d">One class per child. For a play area, one complimentary hour.</small></span></label>
+              <div class="omore" id="classMore" hidden>
+                <fieldset class="f sub" data-f="days" data-ctl="days60">
+                  <legend><span data-i18n="days.l">How often?</span><i class="req" aria-hidden="true">*</i></legend>
+                  <div class="rads">
+                    <label class="radio"><input type="radio" name="days" value="60" id="days60"><span data-i18n="days.60">Every 60 days</span></label>
+                    <label class="radio"><input type="radio" name="days" value="90"><span data-i18n="days.90">Every 90 days</span></label>
+                  </div>
+                  <p class="err" hidden></p>
+                </fieldset>
+                <div class="sub">
+                  <label class="tickl"><input type="checkbox" class="tick sm" id="optPeak"><span data-i18n="peak.l">Off-peak times only</span></label>
+                  <div class="f peakmore" data-f="peakT" id="peakMore" hidden>
+                    <label for="peakT" class="sl"><span data-i18n="peakT.l">Which days and times?</span><i class="req" aria-hidden="true">*</i></label>
+                    <input class="inp" id="peakT" type="text" dir="auto" placeholder="e.g. Sun to Thu, 9am to 2pm" data-i18n-ph="peakT.ph" aria-required="true">
+                    <p class="err" hidden></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="orow" data-opt="price">
+              <label class="ohead"><input type="checkbox" class="tick" id="optPrice" aria-describedby="optPriceD"><span class="otx"><b data-i18n="price.t">An Alurei price</b><small id="optPriceD" data-i18n="price.d">A discount families can use every time they pay.</small></span></label>
+              <div class="omore" id="priceMore" hidden>
+                <div class="f sub" data-f="disc">
+                  <label class="sl" for="optDisc"><span data-i18n="disc.l">Discount</span><i class="req" aria-hidden="true">*</i></label>
+                  <div class="pctrow"><input class="inp" id="optDisc" type="text" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="10" aria-required="true"><span aria-hidden="true" data-i18n="disc.pct">% off</span></div>
+                  <p class="err" hidden></p>
+                </div>
+              </div>
+            </div>
+            <div class="orow" data-opt="drink">
+              <label class="ohead"><input type="checkbox" class="tick" id="optDrink" aria-describedby="optDrinkD"><span class="otx"><b data-i18n="drink.t">A drink for the nanny</b><small id="optDrinkD" data-i18n="drink.d">A coffee or tea for the nanny at the complimentary class.</small></span></label>
+            </div>
+          </div>
+          <p class="err" hidden></p>
+        </fieldset>
+        <p class="callout" data-i18n="callout">Nannies often choose where the day goes. A nanny who is treated well is more likely to choose you again.</p>
+        <p class="help" data-i18n="offer.change">You can change or pause your offer at any time.</p>
+        <div class="prev prev-inline">
+          <span class="pl" id="prevL1" data-i18n="prev.l">Preview: your venue card</span>
+          <div class="vc" id="vcInline" role="group" aria-labelledby="prevL1"></div>
+        </div>
+      </div>
+      <div class="actions"><button class="btn sec" type="button" data-back data-i18n="btn.back">← Back</button><button class="btn pri" type="submit" data-i18n="btn.next">Continue →</button></div>
+      <aside class="prev-side" aria-labelledby="prevL2">
+        <div class="prev">
+          <span class="pl" id="prevL2" data-i18n="prev.l">Preview: your venue card</span>
+          <div class="vc" id="vcSide"></div>
+        </div>
+      </aside>
+    </form>
+
+    <!-- STEP 3: Business Location -->
+    <form class="card" id="s3" novalidate hidden>
+      <h2 class="ct" tabindex="-1" data-i18n="s3.t">Step 3 — Business Location</h2>
+      <p class="banner" data-sum role="alert" hidden></p>
+      <div class="fields">
+        <div class="locs" id="locs"></div>
+        <div class="branch">
+          <p class="lbl" data-i18n="branch.t">More than one branch?</p>
+          <p class="help" data-i18n="branch.d">Each branch has its own address, hours and timetable. One account covers them all.</p>
+          <button class="addloc" type="button" id="addLoc" data-i18n="branch.add">+ Add another location</button>
+        </div>
+      </div>
+      <div class="actions"><button class="btn sec" type="button" data-back data-i18n="btn.back">← Back</button><button class="btn pri" type="submit" data-i18n="btn.next">Continue →</button></div>
+    </form>
+
+    <!-- STEP 4: Contact Information -->
+    <form class="card" id="s4" novalidate hidden>
+      <h2 class="ct" tabindex="-1" data-i18n="s4.t">Step 4 — Contact Information</h2>
+      <p class="banner" data-sum role="alert" hidden></p>
+      <div class="fields">
+        <div class="pair">
+          <div class="f" data-f="name">
+            <label for="name"><span data-i18n="name.l">Contact Person</span><i class="req" aria-hidden="true">*</i></label>
+            <input class="inp" id="name" type="text" autocomplete="name" placeholder="Jane Smith" data-i18n-ph="name.ph" aria-required="true">
+            <p class="err" hidden></p>
+          </div>
+          <div class="f">
+            <label for="role" data-i18n="role.l">Role</label>
+            <input class="inp" id="role" type="text" autocomplete="organization-title" placeholder="e.g. Manager" data-i18n-ph="role.ph">
+          </div>
+        </div>
+        <div class="pair">
+          <div class="f" data-f="email4">
+            <label for="email4"><span data-i18n="email.l">Email</span><i class="req" aria-hidden="true">*</i></label>
+            <input class="inp" id="email4" type="email" inputmode="email" autocomplete="email" spellcheck="false" dir="ltr" placeholder="hello@business.com" aria-required="true">
+            <p class="err" hidden></p>
+          </div>
+          <div class="f" data-f="phone4" data-ctl="phone4">
+            <label for="phone4"><span data-i18n="phone4.l">Phone</span><i class="req" aria-hidden="true">*</i></label>
+            <div class="tel" dir="ltr">
+              <span class="cc"><span id="ccv-phone4">+971</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                <select id="cc-phone4" aria-label="Country code" data-i18n-aria="cc.aria" autocomplete="tel-country-code"></select>
+              </span>
+              <input id="phone4" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 50 123 4567" aria-required="true">
+            </div>
+            <p class="okn" id="ok-phone4" hidden></p>
+            <p class="err" hidden></p>
+          </div>
+        </div>
+        <div class="f" data-f="wa" data-ctl="wa">
+          <label for="wa"><span data-i18n="wa.l">WhatsApp number for bookings</span><i class="req" aria-hidden="true">*</i></label>
+          <p class="help" id="waH" data-i18n="wa.h">Nannies and parents message this number to book with you.</p>
+          <div class="tel" dir="ltr">
+            <span class="cc"><span id="ccv-wa">+971</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <select id="cc-wa" aria-label="Country code" data-i18n-aria="cc.aria" autocomplete="tel-country-code"></select>
+            </span>
+            <input id="wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 50 123 4567" aria-required="true" aria-describedby="waH">
+          </div>
+          <p class="okn" id="ok-wa" hidden></p>
+          <p class="err" hidden></p>
+          <label class="tickl"><input type="checkbox" class="tick sm" id="waSame"><span data-i18n="wa.same">Same as phone number</span></label>
+        </div>
+        <div class="summary">
+          <span id="sumL" data-i18n="sum.l">Setup Summary</span>
+          <dl aria-labelledby="sumL">
+            <div><dt data-i18n="sum.biz">Business</dt><dd id="sumBiz"></dd></div>
+            <div><dt data-i18n="sum.cat">Category</dt><dd id="sumCat"></dd></div>
+            <div><dt data-i18n="sum.loc">Location</dt><dd id="sumLoc"></dd></div>
+            <div><dt data-i18n="sum.ages">Ages</dt><dd id="sumAges"></dd></div>
+            <div><dt data-i18n="sum.offer">Offer</dt><dd id="sumOffer"></dd></div>
+          </dl>
+        </div>
+        <div class="f" data-f="terms" data-ctl="terms">
+          <label class="termsl"><input type="checkbox" class="tick" id="terms" aria-required="true"><span id="termsTxt"><span data-i18n="terms.a">I agree to the </span><a href="terms.html" target="_blank" rel="noopener"><span data-i18n="terms.t">Partner Terms</span><span class="vh" data-i18n="a11y.newtab"> (opens in a new tab)</span></a><span data-i18n="terms.b"> and </span><a href="privacy.html" target="_blank" rel="noopener"><span data-i18n="terms.p">Privacy Policy</span><span class="vh" data-i18n="a11y.newtab"> (opens in a new tab)</span></a><span data-i18n="terms.c">, and I am authorised to agree this offer for the business.</span><i class="req" aria-hidden="true">*</i></span></label>
+          <p class="err" hidden></p>
+        </div>
+        <div class="hp" aria-hidden="true"><input type="text" name="xk_hp" id="hp" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <div class="actions"><button class="btn sec" type="button" data-back data-i18n="btn.back">← Back</button><button class="btn pri" type="submit" id="sendBtn">Send request</button></div>
+      <p class="promise" data-i18n="promise">We’ll be in touch within 2 working days.</p>
+    </form>
+
+    <!-- Request sent (her screen) -->
+    <section class="done" id="sent" hidden aria-labelledby="sentT">
+      <div class="okc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h1 id="sentT" tabindex="-1" data-i18n="sent.t">Request sent</h1>
+      <p data-i18n="sent.d">Thank you. We check every listing before it goes live, and we will reply within two working days.</p>
+      <a class="btn sec" id="backLink" href="https://alurei.app" data-i18n="sent.back">Back to alurei.app</a>
+      <p class="devnote" id="devNote" hidden data-i18n="sent.dev">Preview only: nothing was sent. The form is switched off until the sign-up address is connected.</p>
+    </section>
+
+    <!-- Public site before the sign-up address is connected -->
+    <section class="card soon" id="soon" hidden aria-labelledby="introT">
+      <p data-i18n="soon.d">Partner sign-up opens very soon. Email hello@alurei.app and we’ll be in touch within 2 working days.</p>
+      <div class="actions"><a class="btn pri" href="mailto:hello@alurei.app?subject=Partner%20sign-up" data-i18n="soon.btn">Email hello@alurei.app</a></div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+const FORM_ENDPOINT = ''; // set when Arham gives the sign-up address
+const TERMS_VERSION = '2026-11-12', PRIVACY_VERSION = '2026-11-12';
+
+const $ = (q, r = document) => r.querySelector(q);
+const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+const latin = (v) => String(v).replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+const Q = new URLSearchParams(location.search);
+if (Q.has('still')) document.documentElement.classList.add('still');
+
+// Preview hosts show the whole form and log the request instead of sending it.
+// On the public site, with no sign-up address yet, the form is not shown at all.
+const PREVIEW = false; // go-live copy: no preview behaviour
+const OPEN = !!FORM_ENDPOINT || PREVIEW;
+
+// ---------- Language: English, or Arabic with ?lang=ar ----------
+// The English text is read from the page itself (data-i18n, data-i18n-ph, data-i18n-aria); EN below holds the
+// strings built in the script. Wording for shared terms follows the partner page's AR dictionary.
+// The request sent to the team keeps its English values (category, ages, offer summary, country), plus language: 'ar'|'en'.
+const EN = {
+  'title': 'Partner sign-up · Alurei',
+  'step.n': 'Step {n} of 4, {name}', 'step.done': ', done',
+  'step.1': 'Business Details', 'step.2': 'Your Offer', 'step.3': 'Business Location', 'step.4': 'Contact Information',
+  'logo.again': 'Choose another file',
+  'e.logoType': 'Please choose a PNG, JPG or WEBP file.',
+  'e.logoSize': 'That file is over 2 MB. Please choose a smaller one (PNG, JPG or WEBP).',
+  'cn.971': 'a UAE', 'cn.966': 'a Saudi', 'cn.974': 'a Qatari', 'cn.965': 'a Kuwaiti', 'cn.973': 'a Bahraini', 'cn.968': 'an Omani', 'cn.65': 'a Singapore', 'cn.44': 'a UK',
+  'cc.971': '+971 UAE', 'cc.966': '+966 Saudi Arabia', 'cc.974': '+974 Qatar', 'cc.965': '+965 Kuwait', 'cc.973': '+973 Bahrain', 'cc.968': '+968 Oman', 'cc.65': '+65 Singapore', 'cc.44': '+44 United Kingdom', 'cc.': 'Other (type +)',
+  'cc.short': 'Other',
+  'ph.ok': '✓ We’ll use {num}',
+  'e.phoneBad': 'That doesn’t look like {c} number. Please check the digits after +{cc}.',
+  'e.phoneLen': 'Please check the number. With + and the country code, it should have 8 to 15 digits.',
+  'e.phoneOther': 'Please type the number with + and the country code, for example +33 6 12 34 56 78.',
+  'e.phoneCC': 'That doesn’t look like {c} number. If it’s from another country, choose Other and type + and the country code.',
+  'e.venue': 'Please add your business name.', 'e.cat': 'Please choose a business category.', 'e.catOther': 'Please tell us your category.',
+  'e.ages': 'Please tick at least one age group.', 'e.web': 'Please check the website address.',
+  'e.emailEmpty': 'Please add your email address.', 'e.email': 'Please check your email address.',
+  'e.offer': 'Please tick at least one offer.', 'e.days': 'Please choose every 60 or every 90 days.',
+  'e.peakT': 'Please add the days and times.', 'e.disc': 'Please enter a discount from 5 to 50%.',
+  'e.country': 'Please choose your country.', 'e.city': 'Please add your city.', 'e.visit': 'Please choose how families visit.',
+  'e.tt': 'Please check the link to your timetable.', 'e.ttEmpty': 'Please add a link to your class timetable.',
+  'loc.pre': 'Location {n}: ', 'loc.n': 'Location {n}', 'loc.t': 'Location', 'loc.rm': 'Remove', 'loc.rmVh': ' this location',
+  'country.l': 'Country', 'country.ph': 'Select country', 'country.AE': 'United Arab Emirates',
+  'city.l': 'City', 'city.ph': 'e.g. Dubai', 'area.l': 'Area', 'area.ph': 'e.g. Jumeirah', 'opt': '(optional)', 'opt.sp': ' (optional)',
+  'addr.l': 'Address', 'addr.ph': 'e.g. Shop 4, Al Wasl Road, Jumeirah 1', 'hours.l': 'Opening Hours', 'hours.ph': 'e.g. Mon–Fri 9:00–18:00',
+  'visit.l': 'How do families visit?', 'visit.fixed': 'Fixed classes', 'visit.open': 'Open play, drop in any time',
+  'tt.l': 'Link to your class timetable', 'tt.h': 'Your website or Instagram. We take your schedule from here, so there is nothing to type in.',
+  'e.name': 'Please add a contact person.', 'e.phone4': 'Please add a phone number.',
+  'e.wa': 'Please add a WhatsApp number for bookings, or tick “Same as phone number”.',
+  'e.terms': 'Please tick the box to agree to the Partner Terms and Privacy Policy.',
+  'e.send': 'We couldn’t send your request. Please try again, or email hello@alurei.app.',
+  'btn.send': 'Send request', 'btn.sending': 'Sending request…',
+  'sum.none': 'Not added yet', 'sum.other': 'Other: {x}',
+  'vc.ex': 'Example', 'vc.cAvail': 'Complimentary class available', 'vc.forEve': 'For Eve · ', 'vc.inclT': 'Includes a drink for the nanny', 'vc.inclD': 'A coffee or tea at the complimentary class',
+  'vc.useC': 'Use complimentary class', 'vc.soloT': 'A drink for the nanny', 'vc.soloD': 'A coffee or tea for the nanny when they visit',
+  'vc.priceT': 'Alurei price', 'vc.useP': 'Use Alurei price', 'vc.none': 'Tick at least one offer to see your card.',
+  'vc.every': 'one every {n} days', 'vc.peak': 'Off-peak times only', 'vc.peakT': 'Off-peak times only: {t}',
+  'vc.disc': '{n}% off, any time the family pays', 'vc.discNone': 'A discount any time the family pays',
+  'vc.cityAges': '{city} · ages {ages}', 'vc.ages': 'Ages {ages}', 'vc.city': 'Your city', 'vc.name': 'Your Studio',
+  'o.class': 'complimentary class every {n} days', 'o.peak': ' (off-peak)', 'o.peakT': ' (off-peak: {t})', 'o.disc': '{n}% off', 'o.price': 'an Alurei price', 'o.drink': 'a drink for the nanny', 'o.sep': ', ', 'o.6090': '60 or 90',
+};
+const AR = {
+  'title': 'تسجيل الشركاء · Alurei',
+  'intro.t': 'مرحباً بك في شركاء Alurei', 'intro.s': 'لنُعِدّ بيانات منشأتك قبل أن تبدأ.',
+  'steps.aria': 'خطوات التسجيل', 'step.n': 'الخطوة {n} من 4، {name}', 'step.done': '، مكتملة',
+  'step.1': 'بيانات المنشأة', 'step.2': 'عرضك', 'step.3': 'موقع المنشأة', 'step.4': 'معلومات التواصل',
+  's1.t': 'الخطوة 1 — بيانات المنشأة', 's2.t': 'الخطوة 2 — عرضك', 's3.t': 'الخطوة 3 — موقع المنشأة', 's4.t': 'الخطوة 4 — معلومات التواصل',
+  'btn.next': 'متابعة ←', 'btn.back': '→ رجوع', 'btn.send': 'أرسل الطلب', 'btn.sending': 'جارٍ إرسال الطلب…',
+  // Step 1
+  'logo.t': 'حمّل الشعار', 'opt': '(اختياري)', 'opt.sp': ' (اختياري)',
+  'logo.s': 'بصيغة PNG أو JPG أو WEBP، وبحجم أقصاه 2 ميغابايت. يمكنك إضافته لاحقاً.', 'logo.again': 'اختر ملفاً آخر',
+  'e.logoType': 'يرجى اختيار ملف بصيغة PNG أو JPG أو WEBP.',
+  'e.logoSize': 'حجم هذا الملف أكبر من 2 ميغابايت. يرجى اختيار ملف أصغر (PNG أو JPG أو WEBP).',
+  'venue.l': 'اسم المنشأة', 'venue.ph': 'مثلاً: حضانة النجوم الصغيرة',
+  'cat.l': 'فئة المنشأة', 'cat.ph': 'اختر الفئة',
+  'cat.1': 'الحضانات والتعليم المبكر', 'cat.2': 'حصص الأطفال وأنشطتهم', 'cat.3': 'مناطق اللعب والحفلات والترفيه', 'cat.4': 'المقاهي والمطاعم العائلية', 'cat.5': 'صحة الأطفال وعافيتهم',
+  'cat.6': 'عافية الأمهات والعائلات', 'cat.7': 'متاجر مستلزمات الرضّع والأطفال', 'cat.8': 'السفر العائلي والعطلات المحلية', 'cat.9': 'الخدمات المنزلية والعائلية', 'cat.other': 'أخرى',
+  'catOther.l': 'فئتك', 'catOther.ph': 'مثلاً: استوديو تصوير',
+  'ages.l': 'الفئات العمرية التي تستقبلها', 'ages.h': 'حدّد كل ما ينطبق.',
+  'age.0': 'من 0 إلى 6 أشهر', 'age.1': 'من 6 إلى 12 شهراً', 'age.2': 'من سنة إلى سنتين', 'age.3': 'من 2 إلى 4 سنوات', 'age.4': 'من 4 إلى 8 سنوات', 'age.5': '8 سنوات فأكثر',
+  'web.l': 'الموقع الإلكتروني', 'email.l': 'البريد الإلكتروني', 'phone.l': 'رقم الهاتف', 'cc.aria': 'رمز الدولة',
+  'cn.971': 'الإمارات', 'cn.966': 'السعودية', 'cn.974': 'قطر', 'cn.965': 'الكويت', 'cn.973': 'البحرين', 'cn.968': 'عُمان', 'cn.65': 'سنغافورة', 'cn.44': 'المملكة المتحدة',
+  'cc.971': '‎+971 الإمارات', 'cc.966': '‎+966 السعودية', 'cc.974': '‎+974 قطر', 'cc.965': '‎+965 الكويت', 'cc.973': '‎+973 البحرين', 'cc.968': '‎+968 عُمان', 'cc.65': '‎+65 سنغافورة', 'cc.44': '‎+44 المملكة المتحدة', 'cc.': 'دولة أخرى (اكتب +)',
+  'cc.short': 'أخرى',
+  'ph.ok': '✓ سنستخدم الرقم ⁦{num}⁩',
+  'e.phoneBad': 'لا يبدو أن هذا رقم من {c}. يرجى التحقق من الأرقام بعد ⁦+{cc}⁩.',
+  'e.phoneLen': 'يرجى التحقق من الرقم. مع علامة + ورمز الدولة، يجب أن يتكوّن من 8 إلى 15 رقماً.',
+  'e.phoneOther': 'يرجى كتابة الرقم بعلامة + ثم رمز الدولة، مثل ⁦+33 6 12 34 56 78⁩.',
+  'e.phoneCC': 'لا يبدو أن هذا رقم من {c}. إن كان من دولة أخرى، اختر «دولة أخرى» واكتب علامة + ثم رمز الدولة.',
+  'e.venue': 'يرجى إدخال اسم المنشأة.', 'e.cat': 'يرجى اختيار فئة المنشأة.', 'e.catOther': 'يرجى إخبارنا بفئة منشأتك.',
+  'e.ages': 'يرجى تحديد فئة عمرية واحدة على الأقل.', 'e.web': 'يرجى التحقق من عنوان الموقع الإلكتروني.',
+  'e.emailEmpty': 'يرجى إدخال بريدك الإلكتروني.', 'e.email': 'يرجى التحقق من بريدك الإلكتروني.',
+  // Step 2
+  'carried': 'احتفظنا بالعرض الذي اخترته في صفحة الشركاء.',
+  'offer.l': 'اختر واحداً أو اثنين، أو الثلاثة معاً لعائلات Alurei.',
+  'class.t': 'حصة مجانية', 'class.d': 'حصة واحدة لكل طفل. ولمناطق اللعب، ساعة مجانية واحدة.',
+  'days.l': 'كم مرة؟', 'days.60': 'كل 60 يوماً', 'days.90': 'كل 90 يوماً',
+  'peak.l': 'في أوقات غير الذروة فقط', 'peakT.l': 'ما الأيام والأوقات؟', 'peakT.ph': 'مثلاً: الأحد–الخميس، 9 ص–2 م',
+  'price.t': 'سعر خاص لعائلات Alurei', 'price.d': 'خصم يمكن للعائلات استخدامه في كل مرة تدفع فيها.',
+  'disc.l': 'الخصم', 'disc.pct': '٪ خصم',
+  'drink.t': 'مشروب للمربية', 'drink.d': 'قهوة أو شاي للمربية خلال الحصة المجانية.',
+  'callout': 'غالباً ما تختار المربيات وجهة اليوم. والمربية التي تلقى معاملة طيبة تكون أكثر ميلاً لاختيارك مرة أخرى.',
+  'offer.change': 'يمكنك تغيير عرضك أو إيقافه مؤقتاً في أي وقت.',
+  'prev.l': 'معاينة: بطاقة منشأتك',
+  'e.offer': 'يرجى تحديد عرض واحد على الأقل.', 'e.days': 'يرجى الاختيار بين كل 60 يوماً أو كل 90 يوماً.',
+  'e.peakT': 'يرجى إدخال الأيام والأوقات.', 'e.disc': 'يرجى إدخال خصم بين 5 و50٪.',
+  // Venue card
+  'vc.ex': 'مثال', 'vc.cAvail': 'حصة مجانية متاحة', 'vc.forEve': 'لإيف · ', 'vc.inclT': 'تشمل مشروباً للمربية', 'vc.inclD': 'قهوة أو شاي خلال الحصة المجانية',
+  'vc.useC': 'استخدم الحصة المجانية', 'vc.soloT': 'مشروب للمربية', 'vc.soloD': 'قهوة أو شاي للمربية عند زيارتها',
+  'vc.priceT': 'سعر خاص لعائلات Alurei', 'vc.useP': 'استخدم السعر الخاص', 'vc.none': 'حدّد عرضاً واحداً على الأقل لتظهر بطاقتك.',
+  'vc.every': 'واحدة كل {n} يوماً', 'vc.peak': 'في أوقات غير الذروة فقط', 'vc.peakT': 'في أوقات غير الذروة فقط: {t}',
+  'vc.disc': 'خصم {n}٪ في كل مرة تدفع فيها العائلة', 'vc.discNone': 'خصم في كل مرة تدفع فيها العائلة',
+  'vc.cityAges': '{city} · {ages}', 'vc.ages': '{ages}', 'vc.city': 'مدينتك', 'vc.name': 'الاستوديو الخاص بك',
+  'o.class': 'حصة مجانية كل {n} يوماً', 'o.peak': ' (في أوقات غير الذروة)', 'o.peakT': ' (في أوقات غير الذروة: {t})', 'o.disc': 'خصم {n}٪', 'o.price': 'سعر خاص لعائلات Alurei', 'o.drink': 'مشروب للمربية', 'o.sep': '، ', 'o.6090': '60 أو 90',
+  // Step 3
+  'branch.t': 'لديك أكثر من فرع؟', 'branch.d': 'لكل فرع عنوانه وساعات عمله وجدول حصصه، وحساب واحد يشملها جميعاً.', 'branch.add': '+ أضف موقعاً آخر',
+  'loc.pre': 'الموقع {n}: ', 'loc.n': 'الموقع {n}', 'loc.t': 'الموقع', 'loc.rm': 'إزالة', 'loc.rmVh': ' هذا الموقع',
+  'country.l': 'الدولة', 'country.ph': 'اختر الدولة', 'country.AE': 'الإمارات العربية المتحدة',
+  'city.l': 'المدينة', 'city.ph': 'مثلاً: دبي', 'area.l': 'المنطقة', 'area.ph': 'مثلاً: جميرا',
+  'addr.l': 'العنوان', 'addr.ph': 'مثلاً: محل 4، شارع الوصل، جميرا 1', 'hours.l': 'ساعات العمل', 'hours.ph': 'مثلاً: الإثنين–الجمعة 9:00–18:00',
+  'visit.l': 'كيف تزورك العائلات؟', 'visit.fixed': 'حصص بمواعيد ثابتة', 'visit.open': 'لعب حر، والحضور في أي وقت',
+  'tt.l': 'رابط جدول حصصك', 'tt.h': 'موقعك الإلكتروني أو حسابك على إنستغرام. نأخذ جدولك من هناك، فلا حاجة لكتابة أي شيء.',
+  'e.country': 'يرجى اختيار الدولة.', 'e.city': 'يرجى إدخال المدينة.', 'e.visit': 'يرجى اختيار طريقة زيارة العائلات لك.',
+  'e.tt': 'يرجى التحقق من رابط جدول الحصص.', 'e.ttEmpty': 'يرجى إضافة رابط جدول حصصك.',
+  // Step 4
+  'name.l': 'الشخص المسؤول عن التواصل', 'name.ph': 'سارة أحمد', 'role.l': 'المنصب', 'role.ph': 'مثلاً: مدير المنشأة',
+  'phone4.l': 'الهاتف', 'wa.l': 'رقم واتساب للحجوزات', 'wa.h': 'تراسل المربيات والأهل هذا الرقم للحجز لديك.', 'wa.same': 'نفس رقم الهاتف',
+  'sum.l': 'ملخص الإعداد', 'sum.biz': 'المنشأة', 'sum.cat': 'الفئة', 'sum.loc': 'الموقع', 'sum.ages': 'الأعمار', 'sum.offer': 'العرض',
+  'sum.none': 'لم تُضَف بعد', 'sum.other': 'أخرى: {x}',
+  'terms.a': 'أوافق على ', 'terms.t': 'شروط الشركاء', 'terms.b': ' و', 'terms.p': 'سياسة الخصوصية', 'terms.c': '، وأنا مخوَّل بالموافقة على هذا العرض نيابةً عن المنشأة.',
+  'a11y.newtab': ' (تفتح في علامة تبويب جديدة)',
+  'promise': 'نتواصل معك خلال يومي عمل.',
+  'e.name': 'يرجى إدخال اسم الشخص المسؤول عن التواصل.', 'e.phone4': 'يرجى إدخال رقم الهاتف.',
+  'e.wa': 'يرجى إدخال رقم واتساب للحجوزات، أو تحديد «نفس رقم الهاتف».',
+  'e.terms': 'يرجى تحديد المربع للموافقة على شروط الشركاء وسياسة الخصوصية.',
+  'e.send': 'تعذّر إرسال طلبك. يرجى المحاولة مرة أخرى أو مراسلتنا على hello@alurei.app.',
+  // Request sent, and the public site before sign-up opens
+  'sent.t': 'تم إرسال الطلب', 'sent.d': 'شكراً لك. نراجع كل صفحة قبل نشرها، وسنردّ عليك خلال يومي عمل.', 'sent.back': 'العودة إلى ⁦alurei.app⁩',
+  'sent.dev': 'معاينة فقط: لم يتم إرسال أي بيانات. النموذج متوقف إلى أن يتم ربط عنوان التسجيل.',
+  'soon.d': 'يُفتح تسجيل الشركاء قريباً جداً. راسلنا على hello@alurei.app وسنتواصل معك خلال يومي عمل.', 'soon.btn': 'راسلنا على hello@alurei.app',
+};
+let lang = 'en';
+const fill = (s, v) => (v ? s.replace(/\{(\w+)\}/g, (_, x) => String(v[x])) : s);
+const tr = (k, v) => fill((lang === 'ar' && AR[k]) || EN[k] || '', v);
+// A message that follows the language: shown with tr() each time it is turned into text, so a switch re-words it
+const M = (k, v) => ({ toString: () => tr(k, v) });
+
+// ---------- Errors ----------
+// The app's way: the first problem in the red box at the top of the card, one at a time,
+// and a message under each field that needs fixing.
+let errSeq = 0;
+const F = (n) => document.querySelector(`[data-f="${n}"]`);
+const ctlOf = (f) => (f.dataset.ctl ? document.getElementById(f.dataset.ctl) : f.querySelector('input:not([type=file]):not(:disabled), select, textarea'));
+function describe(ctl, id, on) {
+  const ids = (ctl.getAttribute('aria-describedby') || '').split(/\s+/).filter((x) => x && x !== id);
+  if (on) ids.push(id);
+  if (ids.length) ctl.setAttribute('aria-describedby', ids.join(' ')); else ctl.removeAttribute('aria-describedby');
+}
+function setErr(f, msg, pre = '') {
+  if (!f) return;
+  const e = f.querySelector(':scope > .err'), ctl = ctlOf(f);
+  if (e && !e.id) e.id = 'err-' + (++errSeq);
+  f.classList.toggle('bad', !!msg);
+  f._m = msg || null; f._pre = pre; // kept so a language switch can re-word it
+  if (msg) f.dataset.msg = pre + msg; else delete f.dataset.msg;
+  if (e) { e.hidden = !msg; e.textContent = msg ? String(msg) : ''; }
+  if (ctl) { if (msg) ctl.setAttribute('aria-invalid', 'true'); else ctl.removeAttribute('aria-invalid'); if (e) describe(ctl, e.id, !!msg); }
+}
+function showBanner(form) {
+  const b = $('.banner[data-sum]', form); if (!b) return;
+  const bad = $$('.f.bad', form);
+  b.hidden = !bad.length; if (bad.length) { b.textContent = bad[0].dataset.msg; b._m = null; }
+  if (b.hidden) b.classList.remove('stick');
+}
+function recount(form) { const b = form && $('.banner[data-sum]', form); if (b && !b.hidden) showBanner(form); }
+function validate(form, checks) {
+  checks.forEach(([f, m, pre]) => setErr(f, m, pre));
+  showBanner(form);
+  const bad = checks.filter(([f, m]) => f && m);
+  if (bad.length) {
+    const c = ctlOf(bad[0][0]), b = $('.banner[data-sum]', form);
+    // The message is in the red box at the top of the card. Box and field come into view together;
+    // when the field is too far below the box for one screen (a phone), the box stays pinned at the top while the field comes into view.
+    if (b && !b.hidden) {
+      b.classList.remove('stick');
+      const far = c && c.getBoundingClientRect().bottom - b.getBoundingClientRect().top > innerHeight - 120;
+      if (far) { b.classList.add('stick'); c.scrollIntoView({ block: 'center' }); }
+      else { b.scrollIntoView({ block: 'nearest' }); if (c) c.scrollIntoView({ block: 'nearest' }); }
+      if (c) c.focus({ preventScroll: true });
+    }
+    else if (c) c.focus();
+  }
+  return !bad.length;
+}
+function clearOnEdit(el) {
+  const f = el.closest('[data-f]'); if (!f || !f.classList.contains('bad')) return;
+  setErr(f, ''); recount(el.closest('form'));
+}
+document.addEventListener('input', (e) => { const el = e.target; if (el.closest && el.closest('form') && !['checkbox', 'radio', 'file'].includes(el.type)) clearOnEdit(el); });
+document.addEventListener('change', (e) => {
+  const el = e.target; if (!el.closest || !el.closest('form') || el.closest('.cc')) return; // a country code re-checks its own number
+  if (el.tagName === 'SELECT') el.classList.toggle('empty', !el.value);
+  if (['checkbox', 'radio'].includes(el.type) || el.tagName === 'SELECT') clearOnEdit(el);
+});
+
+// Address and opening hours grow with their text
+document.addEventListener('input', (e) => { const t = e.target; if (t.matches && t.matches('textarea.grow')) { t.style.height = ''; if (t.value) t.style.height = Math.max(t.offsetHeight, t.scrollHeight + 2) + 'px'; } });
+
+// Light checks for links: a web address, or an Instagram @name for the timetable
+const linkOK = (v, at) => (at && /^@[A-Za-z0-9._]{2,30}$/.test(v)) || /^(https?:\/\/)?[^\s/@]+\.[^\s/@]{2,}(\/\S*)?$/i.test(v);
+
+// ---------- Phone: the partner page's parser (normPhone / e164), with Singapore and the UK added ----------
+// Any normal way of typing works: spaces, dashes, dots, brackets, a leading 0, +, 00, Arabic-Indic digits.
+// A number typed with its own + code wins over the picker. Stored as E.164.
+const KNOWN = ['971', '966', '974', '965', '973', '968', '65', '44'];
+// The national number after the country code (without its leading 0)
+const SHAPE = {
+  971: /^(5\d{8}|[234679]\d{7})$/, 966: /^(5\d{8}|1\d{7,8})$/, 974: /^[34567]\d{7}$/, 965: /^[124569]\d{7}$/, 973: /^[136]\d{7}$/, 968: /^[279]\d{7}$/,
+  65: /^[3689]\d{7}$/, 44: /^(7\d{9}|[123]\d{8,9}|8\d{8,9})$/,
+};
+const CN = (c) => M('cn.' + c); // "a UAE" / "الإمارات"
+const PH_EG = { 971: 'e.g. 50 123 4567', 966: 'e.g. 50 123 4567', 974: 'e.g. 3312 3456', 965: 'e.g. 5012 3456', 973: 'e.g. 3612 3456', 968: 'e.g. 9212 3456', 65: 'e.g. 8123 4567', 44: 'e.g. 7700 900123', '': 'e.g. +33 6 12 34 56 78' };
+const phEg = (c) => (lang === 'ar' ? PH_EG[c].replace(/^e\.g\. /, '') : PH_EG[c]); // Arabic: the number alone, as on the partner page
+const CC_OPTS = '<option value="971" selected>+971 UAE</option><option value="966">+966 Saudi Arabia</option><option value="974">+974 Qatar</option><option value="965">+965 Kuwait</option><option value="973">+973 Bahrain</option><option value="968">+968 Oman</option><option value="65">+65 Singapore</option><option value="44">+44 United Kingdom</option><option value="">Other (type +)</option>';
+const ccLabels = (sel) => [...sel.options].forEach((o) => { o.textContent = tr('cc.' + o.value); });
+// A bracket before the + ("(+971) 50 123 4567") is dropped, so the + still counts
+const plusFirst = (s) => s.replace(/^[(\s]+(?=\+|00)/, '');
+const hasPlus = (raw) => /^(\+|00)/.test(plusFirst(latin(raw).trim()));
+function normPhone(raw, cc) {
+  const s = latin(raw).replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, '').replace(/\(0\)/g, '').trim(); let d = s.replace(/\D/g, '');
+  if (/^(\+|00)/.test(plusFirst(s))) {
+    if (plusFirst(s).startsWith('00')) d = d.slice(2);
+    // No country code starts with 0: '+050 123 4567' is a local number with a stray +, read it with the chosen country (UAE if none)
+    if (/^0/.test(d)) { const c = SHAPE[cc] ? cc : '971', n = d.replace(/^0+/, ''); return SHAPE[c].test(n) ? { cc: c, nat: n } : null; }
+    const g = KNOWN.find((c) => d.startsWith(c) && SHAPE[c].test(d.slice(c.length).replace(/^0+/, '')));
+    if (g) return { cc: g, nat: d.slice(g.length).replace(/^0+/, '') };
+    const near = KNOWN.find((c) => d.startsWith(c));
+    if (near) return { bad: near }; // a code we check, with the wrong digits after it: say which country
+    return d.length >= 8 && d.length <= 15 ? { cc: '', nat: d } : null;
+  }
+  if (!cc) return null;
+  if (d.startsWith(cc) && d.length >= cc.length + 8) d = d.slice(cc.length);
+  d = d.replace(/^0+/, '');
+  return SHAPE[cc].test(d) ? { cc, nat: d } : null;
+}
+const okPhone = (raw, cc) => { const r = normPhone(raw, cc); return r && !r.bad ? r : null; };
+function fmtNat(d, cc) {
+  if (cc === '44' && d.length === 10) return `${d.slice(0, 4)} ${d.slice(4)}`;
+  if (d.length === 9) return `${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5)}`;
+  if (d.length === 8) return cc === '971' ? `${d[0]} ${d.slice(1, 4)} ${d.slice(4)}` : `${d.slice(0, 4)} ${d.slice(4)}`;
+  return d;
+}
+const e164 = (r) => '+' + r.cc + r.nat;
+const shown = (r) => (r.cc ? `+${r.cc} ${fmtNat(r.nat, r.cc)}` : '+' + r.nat);
+function phoneErr(raw, cc) {
+  const r = normPhone(raw, cc);
+  if (r && !r.bad) return '';
+  if (r && r.bad) return M('e.phoneBad', { c: CN(r.bad), cc: r.bad });
+  if (hasPlus(raw)) return M('e.phoneLen');
+  if (!cc) return M('e.phoneOther');
+  return M('e.phoneCC', { c: CN(cc) });
+}
+const PH = {};
+function bindPhone(key, after) {
+  const inp = $('#' + key), cc = $('#cc-' + key), ok = $('#ok-' + key), ccv = $('#ccv-' + key), f = inp.closest('[data-f]');
+  cc.innerHTML = CC_OPTS; ccLabels(cc);
+  let last = cc.value; // the code the number in the box was read against
+  const sync = () => { ccv.textContent = cc.value ? '+' + cc.value : tr('cc.short'); inp.placeholder = phEg(cc.value); last = cc.value; };
+  const okText = (r, v) => tr('ph.ok', { num: r.cc ? shown(r) : '+' + plusFirst(latin(v).trim()).replace(/^(\+|00)\s*/, '') });
+  function check(showErr, adopt = true) {
+    const v = inp.value.trim();
+    if (!v) { ok.hidden = true; if (showErr) { setErr(f, ''); recount(inp.closest('form')); } if (after) after(); return null; }
+    const r = okPhone(v, cc.value);
+    // A number with its own + code sets the picker (a code we don't list moves it to Other)
+    if (adopt && r) { if (r.cc) { cc.value = r.cc; inp.value = fmtNat(r.nat, r.cc); } else cc.value = ''; sync(); }
+    ok.hidden = !r; if (r) ok.textContent = okText(r, v);
+    if (showErr) { setErr(f, r ? '' : phoneErr(v, cc.value)); recount(inp.closest('form')); }
+    if (after) after();
+    return r;
+  }
+  // Choosing "Other" after typing a number: a number that was valid for the old code is written out in full
+  // (+971 50 123 4567), never turned into a different code by putting "+" in front of it
+  cc.addEventListener('change', () => {
+    const was = last; sync();
+    const v = inp.value.trim();
+    if (!cc.value && v && !hasPlus(v)) { const r = was ? okPhone(v, was) : null; if (r) inp.value = shown(r); }
+    if (inp.value.trim()) check(true, !!cc.value); // "Other" stays chosen until they leave the box
+    inp.focus();
+  });
+  // Arabic digits become 0-9 on leaving the field (they would otherwise show in reverse order in this left-to-right box)
+  inp.addEventListener('blur', () => { if (/[٠-٩۰-۹]/.test(inp.value)) { inp.value = latin(inp.value); if (after) after(); } if (!inp.readOnly) check(true); });
+  inp.addEventListener('input', () => { ok.hidden = true; if (after) after(); });
+  sync();
+  // After a language switch: the picker's names, "Other", the example and a ✓ line already showing
+  function relabel() {
+    const was = last; ccLabels(cc); sync(); last = was;
+    if (!ok.hidden && !inp.readOnly) { const r = okPhone(inp.value.trim(), cc.value); if (r) ok.textContent = okText(r, inp.value.trim()); }
+  }
+  PH[key] = { inp, cc, ok, f, sync, check, relabel };
+}
+
+// ---------- Logo upload: PNG, JPG or WEBP up to 2 MB, sent with the request ----------
+// A file that is too big or the wrong type gets a message under the box; the logo stays optional.
+const LOGO_TYPES = ['image/png', 'image/jpeg', 'image/webp'], LOGO_MAX = 2 * 1024 * 1024;
+let logoURL = '', logoData = null, logoFile = null;
+function logoErr(msg) {
+  const e = $('#logoErr'), inp = $('#logo');
+  e._m = msg || null; e.hidden = !msg; e.textContent = msg ? String(msg) : ''; $('#logoF').classList.toggle('lbad', !!msg);
+  if (msg) inp.setAttribute('aria-invalid', 'true'); else inp.removeAttribute('aria-invalid');
+  describe(inp, 'logoErr', !!msg);
+}
+$('#logo').addEventListener('change', () => {
+  const inp = $('#logo'), file = inp.files[0]; if (!file) return;
+  if (!LOGO_TYPES.includes(file.type)) { logoErr(M('e.logoType')); inp.value = ''; return; }
+  if (file.size > LOGO_MAX) { logoErr(M('e.logoSize')); inp.value = ''; return; }
+  logoErr('');
+  if (logoURL) URL.revokeObjectURL(logoURL);
+  logoURL = URL.createObjectURL(file); logoFile = file; logoData = null;
+  const rd = new FileReader();
+  rd.onload = () => { if (logoFile === file) logoData = { name: file.name, type: file.type, dataUrl: String(rd.result) }; };
+  rd.readAsDataURL(file);
+  const img = new Image(); img.alt = ''; img.src = logoURL; $('#upIc').replaceChildren(img);
+  const upT = $('#upT'); upT.textContent = file.name; upT.dir = 'auto';
+  $('#upS').dataset.i18n = 'logo.again'; $('#upS').textContent = tr('logo.again');
+  renderOffer();
+});
+
+// ---------- Step 1: "Other" opens a free-text box; ages ----------
+// A block that appears rises 8px and fades in once; the class goes when it ends, so showing a screen again doesn't replay it
+document.addEventListener('animationend', (e) => { if (e.animationName === 'blkIn') e.target.classList.remove('enter'); });
+function reveal(el, on, animate = true) {
+  if (on && el.hidden) { el.hidden = false; if (animate) { el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); } }
+  else if (!on && !el.hidden) { el.hidden = true; el.classList.remove('enter'); }
+}
+$('#cat').addEventListener('change', () => { const on = $('#cat').value === 'Other'; reveal($('#catOtherF'), on); if (!on) setErr(F('catOther'), ''); });
+const AGE_LBL = ['0 to 6 months', '6 to 12 months', '1 to 2 years', '2 to 4 years', '4 to 8 years', '8 years +'];
+const agesOn = () => AGE_LBL.map((_, i) => $('#age' + i).checked);
+// Arabic: the same runs in the partner page's wording ("من 2 إلى 4 سنوات", "8 سنوات فأكثر", "من الولادة حتى 8 سنوات وأكثر")
+function agesTextAr(runs) {
+  const from = ['0', '6 أشهر', 'سنة', '2', '4'], plus = ['', '6 أشهر', 'سنة', 'سنتان', '4 سنوات'];
+  return runs.map(([a, b]) => {
+    if (a === b) return AR['age.' + a];
+    if (b === 5) return a === 0 ? 'من الولادة حتى 8 سنوات وأكثر' : `${plus[a]} فأكثر`;
+    if (b === 1) return 'من 0 إلى 12 شهراً';
+    const end = [0, 0, 2, 4, 8][b];
+    return `من ${from[a]} إلى ${end === 2 ? 'سنتين' : end + ' سنوات'}`;
+  }).join('، ');
+}
+function agesText(on = agesOn(), l = lang) {
+  const runs = []; let i = 0;
+  while (i < 6) { if (!on[i]) { i++; continue; } let j = i; while (j + 1 < 6 && on[j + 1]) j++; runs.push([i, j]); i = j + 1; }
+  if (l === 'ar') return agesTextAr(runs);
+  return runs.map(([a, b]) => {
+    if (a === b) return AGE_LBL[a];
+    // Her band style throughout ("0 to 6 months", "1 to 2 years", "8 years +"); "From birth to 8 years +" only when all six are ticked
+    if (b === 5) return a === 0 ? 'From birth to 8 years +' : `${['', '6 months', '1 year', '2 years', '4 years'][a]} +`;
+    if (b === 1) return '0 to 12 months';
+    const end = [0, 0, 2, 4, 8][b];
+    if (a >= 2) return `${[0, 0, 1, 2, 4][a]} to ${end} years`;
+    return `${a === 0 ? '0' : '6 months'} to ${end} years`;
+  }).join(', ');
+}
+$$('input[name=ages]').forEach((el) => el.addEventListener('change', renderOffer));
+
+// ---------- Step 2: her offer ----------
+// A drink for the nanny can be offered on its own, as in her mockup.
+const optClass = $('#optClass'), optPrice = $('#optPrice'), optDrink = $('#optDrink'), optPeak = $('#optPeak'), optDisc = $('#optDisc'), peakT = $('#peakT');
+function offer() {
+  const cls = optClass.checked, peak = cls && optPeak.checked;
+  const v = latin(optDisc.value).replace(/\D/g, ''), n = parseInt(v, 10);
+  return { cls, days: cls ? (($('input[name=days]:checked') || {}).value || '') : '', peak, times: peak ? peakT.value.trim() : '', drink: optDrink.checked, price: optPrice.checked, disc: n >= 5 && n <= 50 ? n : null, discRaw: v };
+}
+// Her summary format: "Complimentary class every 60 days (off-peak), 10% off"
+function offerText(o, l = lang) {
+  const t = (k, v) => fill((l === 'ar' && AR[k]) || EN[k], v), p = [];
+  if (o.cls) p.push(t('o.class', { n: o.days || t('o.6090') }) + (o.peak ? (o.times ? t('o.peakT', { t: o.times }) : t('o.peak')) : ''));
+  if (o.price) p.push(o.disc != null ? t('o.disc', { n: o.disc }) : t('o.price'));
+  if (o.drink) p.push(t('o.drink'));
+  const s = p.join(t('o.sep'));
+  return s ? s[0].toUpperCase() + s.slice(1) : '';
+}
+
+// Venue card next to step 2: the app's offer-card anatomy, only what is ticked
+const ICON = {
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  ring: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.25"/><path d="m8.5 12.3 2.4 2.4 4.6-4.9"/></svg>',
+};
+const VC_TPL = `<div class="vc-ban"><img src="assets/media/story-3.webp" srcset="assets/media/story-3.webp 1x, assets/media/story-3@2x.webp 2x" alt="" width="330" height="500" loading="lazy" decoding="async"><span class="vc-ex" data-i18n="vc.ex">Example</span></div>
+<div class="vc-body">
+  <div class="vc-head"><span class="vc-av"></span><div><b class="vc-name" dir="auto"></b><small class="vc-sub"></small></div></div>
+  <div class="vc-class" hidden><b class="vc-t" data-i18n="vc.cAvail">Complimentary class available</b><small class="vc-s"><span data-i18n="vc.forEve">For Eve · </span><span class="vc-days"></span></small>
+    <p class="vc-peak" hidden>${ICON.clock}<span class="vc-peakt"></span></p>
+    <div class="vc-drink" hidden>${ICON.ring}<div><b data-i18n="vc.inclT">Includes a drink for the nanny</b><small data-i18n="vc.inclD">A coffee or tea at the complimentary class</small></div></div>
+    <span class="vc-btn" data-i18n="vc.useC">Use complimentary class</span></div>
+  <div class="vc-drink vc-solo" hidden>${ICON.ring}<div><b data-i18n="vc.soloT">A drink for the nanny</b><small data-i18n="vc.soloD">A coffee or tea for the nanny when they visit</small></div></div>
+  <hr class="vc-div" hidden>
+  <div class="vc-price" hidden><b class="vc-t" data-i18n="vc.priceT">Alurei price</b><small class="vc-s vc-disc"></small><span class="vc-btn alt" data-i18n="vc.useP">Use Alurei price</span></div>
+  <p class="vc-empty" hidden data-i18n="vc.none">Tick at least one offer to see your card.</p>
+</div>`;
+function mountCard(host) {
+  host.innerHTML = VC_TPL;
+  const q = (c) => $(c, host);
+  return { first: true, av: q('.vc-av'), name: q('.vc-name'), sub: q('.vc-sub'), cls: q('.vc-class'), days: q('.vc-days'), peak: q('.vc-peak'), peakt: q('.vc-peakt'), drink: q('.vc-class .vc-drink'), solo: q('.vc-solo'), div: q('.vc-div'), price: q('.vc-price'), disc: q('.vc-disc'), empty: q('.vc-empty') };
+}
+const stepCards = [mountCard($('#vcSide')), mountCard($('#vcInline'))];
+// An Arabic name shows its first letter (after "ال"): Arabic initials side by side don't read as a monogram
+const initials = (n) => (/^[؀-ۿ]/.test(n.trim()) ? n.trim().replace(/^ال(?=\S)/, '')[0] : n.split(/\s+/).filter(Boolean).map((w) => w[0]).join('').slice(0, 2).toUpperCase()) || 'YS';
+const lc = (s) => (s ? s[0].toLowerCase() + s.slice(1) : s);
+function updateCard(c, o, m) {
+  c.name.textContent = m.name;
+  c.sub.textContent = m.city && m.ages ? tr('vc.cityAges', { city: m.city, ages: lc(m.ages) }) : m.city || (m.ages ? tr('vc.ages', { ages: lc(m.ages) }) : tr('vc.city'));
+  if (logoURL) { if (c.av.dataset.src !== logoURL) { c.av.dataset.src = logoURL; c.av.classList.add('img'); const img = new Image(); img.alt = ''; img.src = logoURL; c.av.replaceChildren(img); } }
+  else { delete c.av.dataset.src; c.av.classList.remove('img'); c.av.textContent = initials(m.name); }
+  c.days.textContent = tr('vc.every', { n: o.days || tr('o.6090') });
+  c.peakt.textContent = o.times ? tr('vc.peakT', { t: o.times }) : tr('vc.peak');
+  c.disc.textContent = o.disc != null ? tr('vc.disc', { n: o.disc }) : tr('vc.discNone');
+  const a = !c.first;
+  reveal(c.cls, o.cls, a); reveal(c.peak, o.peak, a); reveal(c.drink, o.cls && o.drink, a); reveal(c.solo, !o.cls && o.drink, a); reveal(c.price, o.price, a);
+  reveal(c.div, (o.cls || o.drink) && o.price, false); reveal(c.empty, !o.cls && !o.price && !o.drink, a);
+  c.first = false;
+}
+const firstCity = () => { const L = $('#locs .loc'); return L ? $('[data-city]', L).value.trim() : ''; };
+const venueName = () => $('#venue').value.trim() || tr('vc.name');
+function renderOffer() {
+  const o = offer();
+  $('.orow[data-opt=class]').classList.toggle('on', o.cls);
+  $('.orow[data-opt=price]').classList.toggle('on', o.price);
+  $('.orow[data-opt=drink]').classList.toggle('on', o.drink);
+  reveal($('#classMore'), o.cls); reveal($('#peakMore'), o.peak); reveal($('#priceMore'), o.price);
+  [['days', o.cls], ['disc', o.price], ['peakT', o.peak]].forEach(([k, keep]) => { if (!keep && F(k).classList.contains('bad')) { setErr(F(k), ''); recount($('#s2')); } });
+  const m = { name: venueName(), city: firstCity(), ages: agesText() };
+  stepCards.forEach((c) => updateCard(c, o, m));
+}
+[optClass, optPrice, optPeak, optDrink].forEach((el) => el.addEventListener('change', renderOffer));
+$$('input[name=days]').forEach((el) => el.addEventListener('change', renderOffer));
+peakT.addEventListener('input', renderOffer);
+optDisc.addEventListener('input', () => { const v = latin(optDisc.value).replace(/\D/g, '').slice(0, 2); if (v !== optDisc.value) optDisc.value = v; renderOffer(); });
+optDisc.addEventListener('blur', () => { const o = offer(); if (o.discRaw && o.disc == null) { setErr(F('disc'), M('e.disc')); recount($('#s2')); } });
+$('#venue').addEventListener('input', renderOffer);
+
+// An offer built on the partner page arrives ticked (?offer=class,drink,price,offpeak&days=90&disc=10&times=Sun+to+Thu)
+let carried = false;
+function carryOffer() {
+  if (!Q.has('offer')) return;
+  const list = Q.get('offer').split(',');
+  optClass.checked = list.includes('class'); optPrice.checked = list.includes('price'); optDrink.checked = list.includes('drink');
+  optPeak.checked = optClass.checked && list.includes('offpeak');
+  const d = Q.get('days'); if (optClass.checked && (d === '60' || d === '90')) $(`input[name=days][value="${d}"]`).checked = true;
+  const t = (Q.get('times') || '').trim(); if (optPeak.checked && t) peakT.value = t.slice(0, 80);
+  // A discount outside 5 to 50 is not changed behind their back: the box stays empty with its message
+  const dq = (Q.get('disc') || '').trim(), n = parseInt(latin(dq), 10);
+  if (n >= 5 && n <= 50) optDisc.value = String(n);
+  else if (optPrice.checked && dq) setErr(F('disc'), M('e.disc'));
+  carried = optClass.checked || optPrice.checked || optDrink.checked;
+}
+
+// ---------- Step 3: locations (one or more, all under one account) ----------
+let locSeq = 0;
+function locHTML(i) {
+  return `<div class="loc" data-loc="${i}">
+  <div class="loch" hidden><h3 class="lt" tabindex="-1">${tr('loc.t')}</h3>${i > 1 ? `<button type="button" class="rm" data-rm="${i}"><span data-i18n="loc.rm">${tr('loc.rm')}</span><span class="vh" data-i18n="loc.rmVh">${tr('loc.rmVh')}</span></button>` : ''}</div>
+  <div class="pair">
+    <div class="f" data-f="country-${i}"><label for="country-${i}"><span data-i18n="country.l">${tr('country.l')}</span><i class="req" aria-hidden="true">*</i></label>
+      <select class="inp" id="country-${i}" data-country autocomplete="country" aria-required="true"><option value="" disabled data-i18n="country.ph">${tr('country.ph')}</option><option value="AE" selected data-i18n="country.AE">${tr('country.AE')}</option></select>
+      <p class="err" hidden></p></div>
+    <div class="f" data-f="city-${i}"><label for="city-${i}"><span data-i18n="city.l">${tr('city.l')}</span><i class="req" aria-hidden="true">*</i></label>
+      <input class="inp" id="city-${i}" data-city type="text" autocomplete="address-level2" placeholder="${tr('city.ph')}" data-i18n-ph="city.ph" aria-required="true">
+      <p class="err" hidden></p></div>
+  </div>
+  <div class="f"><label for="area-${i}"><span data-i18n="area.l">${tr('area.l')}</span> <span class="opt" data-i18n="opt">${tr('opt')}</span></label>
+    <input class="inp" id="area-${i}" type="text" autocomplete="address-level3" placeholder="${tr('area.ph')}" data-i18n-ph="area.ph"></div>
+  <div class="f"><label for="addr-${i}" data-i18n="addr.l">${tr('addr.l')}</label>
+    <textarea class="inp grow" id="addr-${i}" rows="1" autocomplete="street-address" placeholder="${tr('addr.ph')}" data-i18n-ph="addr.ph"></textarea></div>
+  <div class="f"><label for="hours-${i}"><span data-i18n="hours.l">${tr('hours.l')}</span> <span class="opt" data-i18n="opt">${tr('opt')}</span></label>
+    <textarea class="inp grow" id="hours-${i}" rows="1" placeholder="${tr('hours.ph')}" data-i18n-ph="hours.ph"></textarea></div>
+  <fieldset class="f" data-f="visit-${i}" data-ctl="visitF-${i}"><legend><span data-i18n="visit.l">${tr('visit.l')}</span><i class="req" aria-hidden="true">*</i></legend>
+    <div class="rads"><label class="radio"><input type="radio" name="visit-${i}" value="fixed" id="visitF-${i}"><span data-i18n="visit.fixed">${tr('visit.fixed')}</span></label><label class="radio"><input type="radio" name="visit-${i}" value="open"><span data-i18n="visit.open">${tr('visit.open')}</span></label></div>
+    <p class="err" hidden></p></fieldset>
+  <div class="f" data-f="tt-${i}"><label for="tt-${i}"><span data-i18n="tt.l">${tr('tt.l')}</span><i class="req tt-req" aria-hidden="true">*</i><span class="opt tt-opt" hidden data-i18n="opt.sp">${tr('opt.sp')}</span></label>
+    <p class="help" id="ttH-${i}" data-i18n="tt.h">${tr('tt.h')}</p>
+    <input class="inp" id="tt-${i}" type="text" inputmode="url" spellcheck="false" dir="ltr" placeholder="https://yourwebsite.com/timetable" aria-describedby="ttH-${i}">
+    <p class="err" hidden></p></div>
+</div>`;
+}
+function numberLocs() {
+  const locs = $$('#locs .loc'), multi = locs.length > 1;
+  locs.forEach((L, k) => { const h = $('.loch', L); h.hidden = !multi; $('.lt', h).textContent = tr('loc.n', { n: k + 1 }); });
+}
+function addLoc(focus) {
+  const i = ++locSeq;
+  $('#locs').insertAdjacentHTML('beforeend', locHTML(i));
+  const L = $('#locs .loc:last-child');
+  numberLocs();
+  // The heading (with its 96px scroll margin) comes into view, so "Location 2" and "Remove" sit clear of the top
+  if (focus) { L.classList.add('enter'); const h = $('.lt', L); h.focus({ preventScroll: true }); h.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches || Q.has('still') ? 'auto' : 'smooth' }); }
+  return L;
+}
+$('#addLoc').addEventListener('click', () => addLoc(true));
+$('#locs').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-rm]'); if (!b) return;
+  b.closest('.loc').remove(); numberLocs(); recount($('#s3')); $('#addLoc').focus();
+});
+// The timetable link is required for Fixed classes and optional for Open play
+$('#locs').addEventListener('change', (e) => {
+  const r = e.target; if (r.type !== 'radio' || !r.name.startsWith('visit-')) return;
+  const i = r.name.slice(6), open = r.value === 'open', f = F('tt-' + i);
+  $('.tt-req', f).hidden = open; $('.tt-opt', f).hidden = !open;
+  if (open && f.classList.contains('bad') && !$('#tt-' + i).value.trim()) { setErr(f, ''); recount($('#s3')); }
+});
+$('#locs').addEventListener('input', (e) => { if (e.target.matches('[data-city]')) renderOffer(); });
+addLoc(false);
+
+// ---------- Screens ----------
+const SCREENS = ['s1', 's2', 's3', 's4', 'sent'];
+const STEPS = ['s1', 's2', 's3', 's4'];
+const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+function stepsHTML(cur) {
+  return [1, 2, 3, 4].map((n) => {
+    const st = n < cur ? 'done' : n === cur ? 'cur' : 'up';
+    return `<li class="st-${st}"${n === cur ? ' aria-current="step"' : ''}><span class="c" aria-hidden="true">${st === 'done' ? CHECK : n}</span><span class="vh">${tr('step.n', { n, name: tr('step.' + n) })}${st === 'done' ? tr('step.done') : ''}</span></li>`;
+  }).join('');
+}
+let cur = 's1';
+function animateIn(el) {
+  el.classList.remove('scr-in'); void el.offsetWidth; el.classList.add('scr-in');
+  el.addEventListener('animationend', function done(e) { if (e.target === el) { el.classList.remove('scr-in'); el.removeEventListener('animationend', done); } });
+}
+// Browser Back and the phone's back gesture: one history entry per screen, like the app's routes.
+// Each entry remembers the screen under it, so "← Back" can step back through history instead of piling up entries.
+const STEP_Q = { s1: '1', s2: '2', s3: '3', s4: '4', sent: 'sent' };
+function urlFor(id) { const u = new URL(location.href); u.searchParams.set('step', STEP_Q[id]); return u.pathname + u.search + u.hash; }
+function go(id, { focus = true, push = true } = {}) {
+  const was = cur;
+  cur = id;
+  if (push && was !== id) { try { history.pushState({ scr: id, prev: was }, '', urlFor(id)); } catch (e) { /* history unavailable: screens still change */ } }
+  document.body.dataset.scr = id;
+  const isStep = STEPS.includes(id);
+  SCREENS.forEach((s) => { $('#' + s).hidden = s !== id; });
+  $('#intro').hidden = !isStep;
+  $('#steps').hidden = !isStep;
+  if (isStep) $('#steps').innerHTML = stepsHTML(STEPS.indexOf(id) + 1);
+  $('#carried').hidden = !carried;
+  if (id === 's4') fillStep4();
+  if (id === 'sent') $('#devNote').hidden = !!FORM_ENDPOINT;
+  renderOffer();
+  animateIn($('#col'));
+  scrollTo(0, 0);
+  if (focus) {
+    const h = { s1: '#s1 .ct', s2: '#s2T', s3: '#s3 .ct', s4: '#s4 .ct', sent: '#sentT' }[id];
+    const el = $(h); if (el) el.focus({ preventScroll: true });
+  }
+}
+$$('[data-back]').forEach((b) => b.addEventListener('click', () => {
+  const to = { s2: 's1', s3: 's2', s4: 's3' }[cur] || 's1', p = history.state && history.state.prev;
+  if (p === to) history.back(); else go(to);
+}));
+addEventListener('popstate', (e) => {
+  if (!OPEN) return;
+  const st = e.state || {};
+  go(st.scr || START_OF(new URLSearchParams(location.search).get('step')), { push: false });
+});
+
+// Step 1
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const emailMsg = (v) => (!v ? M('e.emailEmpty') : EMAIL_RE.test(v) ? '' : M('e.email'));
+$('#s1').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const ph = $('#phone').value.trim(), web = $('#web').value.trim(), other = $('#cat').value === 'Other';
+  const ok = validate($('#s1'), [
+    [F('venue'), $('#venue').value.trim() ? '' : M('e.venue')],
+    [F('cat'), $('#cat').value ? '' : M('e.cat')],
+    [F('catOther'), other && !$('#catOther').value.trim() ? M('e.catOther') : ''],
+    [F('ages'), agesOn().some(Boolean) ? '' : M('e.ages')],
+    [F('web'), !web || linkOK(web) ? '' : M('e.web')],
+    [F('email'), emailMsg($('#email').value.trim())],
+    [F('phone'), ph ? phoneErr(ph, PH.phone.cc.value) : ''],
+  ]);
+  if (ph && !F('phone').classList.contains('bad')) PH.phone.check(false);
+  if (ok) go('s2');
+});
+
+// Step 2
+$('#s2').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const o = offer();
+  const ok = validate($('#s2'), [
+    [F('offer'), o.cls || o.price || o.drink ? '' : M('e.offer')],
+    [F('days'), o.cls && !o.days ? M('e.days') : ''],
+    [F('peakT'), o.peak && !o.times ? M('e.peakT') : ''],
+    [F('disc'), o.price && o.disc == null ? M('e.disc') : ''],
+  ]);
+  if (ok) go('s3');
+});
+
+// Step 3
+$('#s3').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const locs = $$('#locs .loc'), multi = locs.length > 1, checks = [];
+  locs.forEach((L, k) => {
+    const i = L.dataset.loc, pre = multi ? M('loc.pre', { n: k + 1 }) : '';
+    const visit = ($(`input[name="visit-${i}"]:checked`) || {}).value || '', tt = $('#tt-' + i).value.trim();
+    checks.push(
+      [F('country-' + i), $('#country-' + i).value ? '' : M('e.country'), pre],
+      [F('city-' + i), $('#city-' + i).value.trim() ? '' : M('e.city'), pre],
+      [F('visit-' + i), visit ? '' : M('e.visit'), pre],
+      [F('tt-' + i), tt ? (linkOK(tt, true) ? '' : M('e.tt')) : visit === 'fixed' ? M('e.ttEmpty') : '', pre],
+    );
+  });
+  if (validate($('#s3'), checks)) go('s4');
+});
+
+// Step 4: email and phone filled in from step 1; WhatsApp can copy the phone
+const auto4 = { email: null, phone: null };
+const waSame = $('#waSame');
+function syncWa() {
+  const on = waSame.checked, w = PH.wa, p = PH.phone4;
+  w.inp.readOnly = on; w.f.classList.toggle('same', on);
+  if (on) {
+    w.inp.value = p.inp.value; w.cc.value = p.cc.value; w.sync();
+    w.ok.hidden = p.ok.hidden; w.ok.textContent = p.ok.textContent;
+    if (w.f.classList.contains('bad')) { setErr(w.f, ''); recount($('#s4')); }
+  }
+}
+waSame.addEventListener('change', () => { syncWa(); if (!waSame.checked) PH.wa.inp.focus(); });
+function sumRow(id, v) { const el = $(id); el.replaceChildren(); [].concat(v || tr('sum.none')).forEach((t) => { const s = document.createElement('span'); s.dir = 'auto'; s.textContent = t; el.append(s); }); el.classList.toggle('none', !v || !v.length); }
+function fillStep4() {
+  const e1 = $('#email').value.trim();
+  if (!$('#email4').value.trim() || $('#email4').value === auto4.email) { $('#email4').value = e1; auto4.email = e1; }
+  const p1 = latin($('#phone').value.trim()), p4 = PH.phone4;
+  if (!p4.inp.value.trim() || p4.inp.value === auto4.phone) { p4.inp.value = p1; p4.cc.value = PH.phone.cc.value; p4.sync(); if (p1) p4.check(false); auto4.phone = p4.inp.value; }
+  syncWa();
+  fillSummary();
+}
+function fillSummary() {
+  const cs = $('#cat'), cat = cs.value, other = $('#catOther').value.trim();
+  sumRow('#sumBiz', $('#venue').value.trim());
+  sumRow('#sumCat', cat === 'Other' && other ? tr('sum.other', { x: other }) : cat ? cs.selectedOptions[0].text : '');
+  const locs = $$('#locs .loc').map((L) => { const c = $('[data-city]', L).value.trim(), s = $('[data-country]', L); return c ? (s.value ? `${c}, ${s.selectedOptions[0].text}` : c) : ''; }).filter(Boolean);
+  sumRow('#sumLoc', locs.length ? locs : '');
+  sumRow('#sumAges', agesText());
+  sumRow('#sumOffer', offerText(offer()));
+}
+// ---------- Sending ----------
+// The Terms tick's sentence exactly as shown (without the "opens in a new tab" notes and the * mark)
+function termsSentence() {
+  const c = $('#termsTxt').cloneNode(true);
+  $$('.vh, .req', c).forEach((x) => x.remove());
+  return c.textContent.replace(/\s+/g, ' ').trim();
+}
+function buildRequest(r1, r4, rw) {
+  const o = offer(), cat = $('#cat').value, on = agesOn(), val = (id) => $('#' + id).value.trim();
+  const track = {};
+  Q.forEach((v, k) => { if (/^utm_/i.test(k) || k === 'src' || k === 'ref') track[k] = v.slice(0, 200); });
+  return {
+    business: {
+      name: val('venue'), category: cat, categoryOther: cat === 'Other' ? val('catOther') : '',
+      ages: AGE_LBL.filter((_, i) => on[i]), agesSummary: agesText(on, 'en'),
+      website: val('web'), email: val('email'), phone: r1 ? e164(r1) : '',
+      logo: logoData, // { name, type, dataUrl } or null
+    },
+    offer: {
+      complimentaryClass: o.cls, days: o.cls ? Number(o.days) : null,
+      offPeakOnly: o.peak, offPeakTimes: o.times,
+      drinkForNanny: o.drink,
+      alureiPrice: o.price, discount: o.price ? o.disc : null,
+      alureiPriceNote: o.price ? `${o.disc}% off, any time the family pays` : '',
+      summary: offerText(o, 'en'),
+    },
+    locations: $$('#locs .loc').map((L) => {
+      const i = L.dataset.loc, s = $('#country-' + i);
+      return {
+        country: s.value, countryName: s.value ? EN['country.' + s.value] || s.selectedOptions[0].text : '',
+        city: val('city-' + i), area: val('area-' + i), address: val('addr-' + i), openingHours: val('hours-' + i),
+        visitType: ($(`input[name="visit-${i}"]:checked`) || {}).value || '', timetableLink: val('tt-' + i),
+      };
+    }),
+    contact: {
+      name: val('name'), role: val('role'), email: val('email4'),
+      phone: e164(r4), whatsapp: e164(rw), whatsappSameAsPhone: waSame.checked,
+    },
+    consent: {
+      termsAccepted: $('#terms').checked, termsText: termsSentence(),
+      termsVersion: TERMS_VERSION, privacyVersion: PRIVACY_VERSION,
+    },
+    language: document.documentElement.lang || 'en',
+    ...track,
+    submittedAt: new Date().toISOString(),
+    // Spam trap: a filled trap goes through as normal (a person whose browser filled it is never stuck), flagged for the server
+    ...($('#hp').value ? { spamTrap: true } : {}),
+  };
+}
+let sending = false;
+function sendFailed() {
+  const b = $('.banner[data-sum]', $('#s4'));
+  b.classList.remove('stick');
+  b._m = M('e.send'); b.textContent = String(b._m);
+  b.hidden = false;
+  b.scrollIntoView({ block: 'nearest' });
+  $('#sendBtn').focus({ preventScroll: true });
+}
+$('#s4').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (sending) return;
+  const ph = PH.phone4.inp.value.trim(), w = PH.wa.inp.value.trim(), same = waSame.checked;
+  const ok = validate($('#s4'), [
+    [F('name'), $('#name').value.trim() ? '' : M('e.name')],
+    [F('email4'), emailMsg($('#email4').value.trim())],
+    [F('phone4'), ph ? phoneErr(ph, PH.phone4.cc.value) : M('e.phone4')],
+    [F('wa'), same ? '' : w ? phoneErr(w, PH.wa.cc.value) : M('e.wa')],
+    [F('terms'), $('#terms').checked ? '' : M('e.terms')],
+  ]);
+  if (!ok) return;
+  const p1 = $('#phone').value.trim(), r1 = p1 ? okPhone(p1, PH.phone.cc.value) : null;
+  const r4 = PH.phone4.check(false); if (same) syncWa();
+  const rw = same ? r4 : PH.wa.check(false);
+  const data = buildRequest(r1, r4, rw);
+  const form = $('#s4'), btn = $('#sendBtn');
+  sending = true; btn.disabled = true; btn.textContent = tr('btn.sending'); form.setAttribute('aria-busy', 'true');
+  try {
+    if (FORM_ENDPOINT) {
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      if (!res.ok) throw new Error('send failed');
+    } else {
+      console.info('Preview only: this request was not sent anywhere.', data);
+    }
+    go('sent');
+  } catch (err) {
+    sendFailed(); // everything they typed stays in the form
+  } finally {
+    sending = false; btn.disabled = false; btn.textContent = tr('btn.send'); form.removeAttribute('aria-busy');
+  }
+});
+
+// ---------- Language switch: keeps the screen and everything typed; the link's ?lang follows ----------
+$$('[data-i18n]').forEach((el) => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.textContent; });
+$$('[data-i18n-ph]').forEach((el) => { if (!(el.dataset.i18nPh in EN)) EN[el.dataset.i18nPh] = el.placeholder; });
+$$('[data-i18n-aria]').forEach((el) => { if (!(el.dataset.i18nAria in EN)) EN[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+function setLang(l) {
+  lang = l;
+  const d = document.documentElement; d.lang = l; d.dir = l === 'ar' ? 'rtl' : 'ltr';
+  $$('[data-i18n]').forEach((el) => { el.textContent = tr(el.dataset.i18n); });
+  $$('[data-i18n-ph]').forEach((el) => { el.placeholder = tr(el.dataset.i18nPh); });
+  $$('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', tr(el.dataset.i18nAria)));
+  document.title = tr('title');
+  const other = l === 'ar' ? 'English' : 'العربية', lb = $('#langB');
+  $('#langL').textContent = other; lb.lang = l === 'ar' ? 'en' : 'ar'; lb.setAttribute('aria-label', other);
+  $('#draftBadge').hidden = !(PREVIEW && l === 'ar'); // preview hosts only, never on the public site
+  $('#backLink').href = 'https://alurei.app';
+  $('#sendBtn').textContent = tr(sending ? 'btn.sending' : 'btn.send');
+  try { const u = new URL(location.href); if (l === 'ar') u.searchParams.set('lang', 'ar'); else u.searchParams.delete('lang'); history.replaceState(history.state, '', u.pathname + u.search + u.hash); } catch (e) { /* history unavailable */ }
+  // What the script wrote: phone pickers and ✓ lines, location headings, steps bar, venue card, summary, messages
+  Object.values(PH).forEach((p) => p.relabel()); if (waSame.checked) syncWa();
+  numberLocs(); renderOffer();
+  if (STEPS.includes(cur) && !$('#steps').hidden) $('#steps').innerHTML = stepsHTML(STEPS.indexOf(cur) + 1);
+  if (cur === 's4') fillSummary();
+  const le = $('#logoErr'); if (le._m) le.textContent = String(le._m);
+  $$('.f.bad').forEach((f) => { if (f._m) setErr(f, f._m, f._pre); });
+  $$('form').forEach((form) => {
+    const b = $('.banner[data-sum]', form); if (!b || b.hidden) return;
+    if ($('.f.bad', form)) showBanner(form); else if (b._m) b.textContent = String(b._m);
+  });
+}
+$('#langB').addEventListener('click', () => setLang(lang === 'ar' ? 'en' : 'ar'));
+
+// ---------- Start: ?step=1|2|3|4|sent ----------
+bindPhone('phone'); bindPhone('phone4', () => { if (waSame.checked) syncWa(); }); bindPhone('wa');
+if (Q.get('lang') === 'ar') setLang('ar');
+function START_OF(step) { return { 1: 's1', 2: 's2', 3: 's3', 4: 's4', 5: 'sent', sent: 'sent', done: 'sent', submitted: 'sent' }[(step || '1').toLowerCase()] || 's1'; }
+if (!OPEN) {
+  // The public site before the sign-up address is connected: one calm card, no form
+  document.body.dataset.scr = 'soon';
+  SCREENS.forEach((s) => { $('#' + s).hidden = true; });
+  $('#steps').hidden = true; $('#introS').hidden = true;
+  $('#soon').hidden = false;
+} else {
+  carryOffer();
+  const START = START_OF(Q.get('step'));
+  go(START, { focus: false, push: false });
+  try {
+    history.scrollRestoration = 'manual'; // each screen opens at the top, as go() does
+    const st = history.state; // after a reload, keep what was under this screen so "← Back" still steps back
+    history.replaceState({ scr: START, prev: st && st.scr === START ? st.prev || null : null }, '');
+  } catch (e) { /* history unavailable */ }
+}
+</script>
+</body>
+</html>
