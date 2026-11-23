@@ -29,5 +29,12 @@ no wildcard record; no CAA record (so GitHub's certificate can be issued). alure
 - No DNS changed, nothing on the Hostinger server, no Caddy change, no Alurei-Org repo.
 - Sign-up address (FORM_ENDPOINT) still blank: on partners.alurei.app the sign-up shows the calm "opens very soon, email hello@alurei.app" card and the WhatsApp box says the same, so nothing looks broken and nothing is silently lost.
 
+## Turning on the sign-up form (N24, after the backend is deployed)
+Backend: Alurei-Org/alurei-backend#12 (+ admin Alurei-Org/alurei-web#4). Only after those are merged, deployed and a test application arrives:
+1. In partner-preview `signup.html`, under `SIGN-UP SWITCH`, set `const FORM_ENDPOINT = 'https://api.alurei.app/api/v1/partner-applications';`
+2. In partner-preview `index.html`, under `WHATSAPP CALL-BACK SWITCH`, set `const FORM_ENDPOINT = 'https://api.alurei.app/api/v1/partner-applications/callback';`
+3. `python3 tools/make-release.py`, copy `release/` into alurei-partners (keep its `CNAME`), commit and push.
+4. Undo: set both lines back to `''` and repeat step 3. The page goes back to the "opens very soon" card.
+
 ## Book-a-call button
 Until https://alurei.app/book is live (Arham will say), "Book a 10-minute call" opens an email to hello@alurei.app. To switch: in `index.html` change the one line under `BOOK-A-CALL SWITCH` to `const BOOKING_URL = 'https://alurei.app/book';`, rebuild with `python3 tools/make-release.py` and copy `release/` into alurei-partners.
