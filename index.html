@@ -962,12 +962,9 @@
     .faq-list details[open] .faq-a, .thanks { animation: none; }
     .xring::before, .bal, .scr-2 .ev, .enter { animation: none !important; }
   }
-  /* Preview hosts only, when Arabic is on */
-  .draft-badge { margin: 0; padding: 6px 16px; background: #FFF7E6; border-bottom: 1px solid #F3E1B8; color: #6B4E16; font-family: Inter, "IBM Plex Sans Arabic", sans-serif; font-size: 12px; line-height: 18px; font-weight: 500; text-align: center; }
 </style>
 </head>
 <body>
-<p class="draft-badge" id="draftBadge" hidden><span lang="en" dir="ltr">Arabic draft – needs native check</span> · <span lang="ar" dir="rtl">مسودة عربية – تحتاج إلى مراجعة من متحدث أصلي</span></p>
 
 <!-- Floating bottom navigation (as on alurei.app) -->
 <nav class="navpill" aria-label="Sections" data-i18n-aria="nav.sections">
@@ -1394,7 +1391,7 @@
             <div class="thanks" id="thanks" hidden tabindex="-1">
               <span class="t-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
               <h3 data-i18n="t.title">Thank you!</h3>
-              <p id="tText">We’ll message you on WhatsApp within two working days.</p>
+              <p id="tText" data-i18n="t.text">We’ll message you on WhatsApp within two working days.</p>
               <button type="button" class="linkbtn" id="tEdit" data-i18n="t.edit">Wrong number? Change it</button>
               <p class="form-note" id="previewNote" hidden data-i18n="t.preview">Preview only: nothing was sent. To join now, email hello@alurei.app.</p>
             </div>
@@ -1581,6 +1578,7 @@ const AR = {
   'cc.uk': '‎+44 المملكة المتحدة',
   'err.phoneEmpty': 'يرجى إدخال رقم واتساب.',
   'err.phone2': 'يرجى التحقق من رقم واتساب. للأرقام من خارج دول الخليج، ابدأ بعلامة + ثم رمز الدولة.',
+  't.text': 'سنراسلك عبر واتساب خلال يومي عمل.',
   't.text2': 'سنراسلك عبر واتساب على الرقم {num} خلال يومي عمل.',
   't.edit': 'الرقم غير صحيح؟ غيّره',
   'faq.8q': 'منشأتي في أبوظبي. هل يمكنني الانضمام؟',
@@ -1987,9 +1985,8 @@ function setLang(l) {
   document.documentElement.classList.remove('i18n-wait');
 }
 document.querySelectorAll('[data-lang-toggle]').forEach((b) => b.addEventListener('click', () => setLang(lang === 'ar' ? 'en' : 'ar')));
-// Preview hosts only (as on signup.html): the Arabic is a draft until a native speaker has checked it. Never on the public site.
+// Preview hosts only (as on signup.html). Never on the public site.
 const PREVIEW_HOST = false; // go-live copy: no preview behaviour
-langHooks.push(() => { document.getElementById('draftBadge').hidden = !(PREVIEW_HOST && lang === 'ar'); });
 
 // Highlight the current section in the bottom pill (nothing while the hero is in view).
 const navLinks = [...document.querySelectorAll('.navpill [data-nav]')];
